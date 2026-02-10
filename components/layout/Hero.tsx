@@ -1,14 +1,16 @@
 "use client"
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import "swiper/css/effect-fade";
 
 export default function Hero() {
     const slides = [
@@ -24,26 +26,35 @@ export default function Hero() {
             title: "Expert Care for Your Health",
             subtitle: "Advanced treatments and compassionate care from the leading vein specialists."
         },
-        // We can add more slides here if needed later
     ];
 
     return (
-        <section className="relative w-full">
+        <section className="relative w-full overflow-hidden group">
             <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
+                modules={[Navigation, Pagination, Autoplay, EffectFade]}
+                effect="fade"
+                speed={1000}
                 spaceBetween={0}
                 slidesPerView={1}
-                navigation
-                pagination={{ clickable: true }}
-                autoplay={{ delay: 5000 }}
+                navigation={{
+                    nextEl: ".hero-next",
+                    prevEl: ".hero-prev",
+                }}
+                pagination={{ 
+                    clickable: true,
+                    el: ".custom-pagination",
+                    bulletClass: "swiper-pagination-bullet !bg-white !opacity-50 !w-3 !h-2 !rounded-full !mx-0 !transition-all !duration-300 !cursor-pointer",
+                    bulletActiveClass: "swiper-pagination-bullet-active !opacity-100 !w-12",
+                }}
+                autoplay={{ delay: 5000, disableOnInteraction: false }}
                 loop={true}
-                className="hero-swiper h-[640px] w-full"
+                className="hero-swiper w-full aspect-1440/640 h-auto min-h-[400px] max-h-[700px]"
             >
                 {slides.map((slide) => (
                     <SwiperSlide key={slide.id}>
                         <div className="relative h-full w-full flex items-center justify-center text-center text-white">
                             {/* Background Image */}
-                            <div className="absolute inset-0 -z-10">
+                            <div className="absolute inset-0 -z-10 bg-background">
                                 <Image
                                     src={slide.image}
                                     alt={slide.title}
@@ -52,55 +63,40 @@ export default function Hero() {
                                     priority
                                 />
                                 {/* Dark Overlay for readability */}
-                                <div className="absolute inset-0 bg-black/30" />
+                                <div className="absolute inset-0 bg-black/20" />
                             </div>
 
                             {/* Content Overlay */}
-                            <div className="container mx-auto px-4 max-w-4xl">
-                                <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-[1.1]">
+                            <div className="container mx-auto px-4 max-w-7xl space-y-6">
+                                <h1 className="text-4xl md:text-5xl font-bold tracking-wider leading-[.8] animate-in fade-in slide-in-from-bottom-5 duration-700">
                                     {slide.title}
                                 </h1>
-                                <p className="text-lg md:text-xl mb-10 opacity-90 max-w-3xl mx-auto">
+                                <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
                                     {slide.subtitle}
                                 </p>
-                                <Button 
-                                    className="bg-white text-primary hover:bg-white/90 h-14 px-10 text-xl font-medium rounded-lg shadow-lg transition-all"
-                                >
-                                    Book Now
-                                </Button>
+                                <div className="pt-4 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-300">
+                                    <Button 
+                                        className="h-14 px-12 rounded-2xl bg-white text-primary hover:bg-white/90 text-lg font-bold shadow-xl border-none cursor-pointer"
+                                    >
+                                        Book Now
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
                 ))}
             </Swiper>
 
-            <style jsx global>{`
-                .hero-swiper .swiper-button-next,
-                .hero-swiper .swiper-button-prev {
-                    color: white;
-                    background: rgba(255, 255, 255, 0.1);
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    backdrop-filter: blur(4px);
-                }
-                .hero-swiper .swiper-button-next:after,
-                .hero-swiper .swiper-button-prev:after {
-                    font-size: 20px;
-                    font-weight: bold;
-                }
-                .hero-swiper .swiper-pagination-bullet {
-                    background: white;
-                    opacity: 0.5;
-                    width: 40px;
-                    height: 4px;
-                    border-radius: 2px;
-                }
-                .hero-swiper .swiper-pagination-bullet-active {
-                    background: white;
-                    opacity: 1;
-                }
-            `}</style>
+            {/* Navigation Controls */}
+            <button className="hero-prev absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 text-white border border-white/20 transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm cursor-pointer">
+                <ChevronLeft className="h-6 w-6" />
+            </button>
+            <button className="hero-next absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 text-white border border-white/20 transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm cursor-pointer">
+                <ChevronRight className="h-6 w-6" />
+            </button>
+
+            {/* Pagination Container */}
+            <div className="custom-pagination absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-2" />
         </section>
     );
 }
