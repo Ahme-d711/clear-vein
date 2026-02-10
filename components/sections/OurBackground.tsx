@@ -3,13 +3,13 @@ import InfoSection from "./InfoSection";
 
 export default function OurBackground() {
   const media = (
-    <div className="relative transition-all duration-500 hover:scale-[1.01]">
+    <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 transition-all duration-500 hover:scale-[1.02]">
       <Image
-        src="/background.svg"
+        src="/background.jpg"
         alt="Dr. Ahmed Hassanin Background"
         width={800}
         height={1000}
-        className="w-full h-auto"
+        className="w-full h-auto object-cover"
       />
     </div>
   );

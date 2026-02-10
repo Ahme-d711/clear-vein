@@ -1,7 +1,8 @@
-import Hero from "@/components/layout/Hero";
+import Hero from "@/components/sections/Hero";
 import Introduction from "@/components/sections/Introduction";
 import OurApproach from "@/components/sections/OurApproach";
 import OurBackground from "@/components/sections/OurBackground";
+import CTASection from "@/components/sections/CTASection";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Introduction />
       <OurApproach />
       <OurBackground />
+      <CTASection />
     </main>
   );
 }

@@ -20,7 +20,7 @@ export default function InfoSection({
 }: InfoSectionProps) {
   return (
     <section className={cn("py-20", bgColor, className)}>
-      <div className="container mx-auto px-4">
+      <div className="container max-w-[1440px] mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Media Content */}
           <div className={cn(
