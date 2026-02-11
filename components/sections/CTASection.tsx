@@ -119,7 +119,7 @@ export default function CTASection() {
             <div className="pt-4">
               <Button 
               size="lg" 
-              className="px-12 py-8 text-xl rounded-2xl bg-white text-[#007095] hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-lg hover:scale-105 active:scale-95 font-bold"
+              className="px-12 py-8 text-xl rounded-2xl text-[#007095] hover:text-white border-2 border-white shadow-xl cursor-pointer transition-all duration-500 hover:shadow-lg hover:scale-105 active:scale-95 font-bold bg-linear-to-r from-white via-white to-[#007095] bg-size-[200%_100%] bg-left hover:bg-right"
             >
   
                 Talk to a Specialist

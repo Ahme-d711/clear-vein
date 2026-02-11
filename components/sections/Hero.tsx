@@ -80,7 +80,7 @@ export default function Hero() {
                                 <Slide direction="up" triggerOnce delay={400} duration={800}>
                                     <div className="pt-4">
                                         <Button 
-                                            className="h-14 px-12 rounded-2xl bg-white text-primary hover:bg-white/90 text-lg font-bold shadow-xl border-none cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
+                                            className="h-14 px-12 rounded-2xl text-lg hover:border-none text-primary hover:text-white border-2 border-white shadow-xl cursor-pointer transition-all duration-500 hover:shadow-lg hover:scale-105 active:scale-95 bg-linear-to-r from-white via-white to-primary bg-size-[200%_100%] bg-left hover:bg-right"
                                         >
                                             Book Now
                                         </Button>

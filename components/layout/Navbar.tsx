@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <Fade direction="down" triggerOnce duration={1000}>
       <nav className="sticky top-0 z-50 w-full border-b bg-background backdrop-blur-md ">
-        <div className="container mx-auto max-w-[1440px] flex h-20 items-center justify-between px-4 md:px-6"> 
+        <div className="container mx-auto max-w-[1440px] flex h-24 items-center justify-between px-4 md:px-6"> 
           <div className="flex items-center gap-8">
 
           {/* Left: Logo */}
@@ -40,7 +40,7 @@ export default function Navbar() {
           {/* Right: CTA Button */}
           <Button 
               variant="outline" 
-              className="border-primary bg-white h-12 rounded-2xl text-primary hover:bg-primary hover:text-primary-foreground text-base font-medium leading-6 tracking-[0.5px] gap-2 cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg"
+              className="border-primary h-12 px-8 rounded-2xl text-primary hover:text-white hover:border-none text-base font-medium leading-6 tracking-[0.5px] gap-2 cursor-pointer transition-all duration-500 hover:scale-105 active:scale-95 hover:shadow-lg bg-linear-to-r from-white via-white to-primary bg-size-[200%_100%] bg-left hover:bg-right"
           >
               Booking Now
               <ArrowRight className="w-4 h-4" />
