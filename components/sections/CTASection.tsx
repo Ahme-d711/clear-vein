@@ -108,7 +108,7 @@ export default function CTASection() {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-tight">
+            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.1]">
               Caring for Your Veins, <br />
               <span className="text-blue-100">Caring for You</span>
             </h2>

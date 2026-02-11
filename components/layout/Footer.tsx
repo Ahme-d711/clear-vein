@@ -10,8 +10,7 @@ import {
   Github,
 } from "lucide-react";
 
-const MainFooter = () => {
-
+export default function MainFooter() {
   const payments = [
     { name: "Visa", src: "/footer/Visa.svg" },
     { name: "Mastercard", src: "/footer/Mastercard.svg" },
@@ -20,18 +19,57 @@ const MainFooter = () => {
     { name: "GooglePay", src: "/footer/G Pay.svg" },
   ];
 
+  const sections = [
+    {
+      title: "Company",
+      links: [
+        { label: "About", href: "#" },
+        { label: "Features", href: "#" },
+        { label: "Works", href: "#" },
+        { label: "Career", href: "#" },
+      ],
+    },
+    {
+      title: "Help",
+      links: [
+        { label: "Customer Support", href: "#" },
+        { label: "Delivery Details", href: "#" },
+        { label: "Terms & Conditions", href: "#" },
+        { label: "Privacy Policy", href: "#" },
+      ],
+    },
+    {
+      title: "FAQ",
+      links: [
+        { label: "Account", href: "#" },
+        { label: "Manage Deliveries", href: "#" },
+        { label: "Orders", href: "#" },
+        { label: "Payments", href: "#" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { label: "Free eBooks", href: "#" },
+        { label: "Development Tutorial", href: "#" },
+        { label: "How to - Blog", href: "#" },
+        { label: "Youtube Playlist", href: "#" },
+      ],
+    },
+  ];
+
   return (
-    <footer className="bg-white border-t border-divider pt-16 pb-8">
+    <footer className="bg-[#f0f0f0] border-t border-gray-200 pt-16 pb-8">
       <div className="container max-w-[1440px] mx-auto px-4">
         {/* Top Section: Branding and Links */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
           {/* Brand Info */}
           <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="text-3xl font-bold text-primary tracking-tight">
-              Silver Glow.Com
+            <Link href="/" className="text-3xl font-black text-primary tracking-tight uppercase">
+              Clear Vein.Com
             </Link>
-            <p className="text-content-secondary text-base max-w-xs leading-relaxed">
-              description
+            <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
+              We have clothes that suits your style and which you're proud to wear. From women to men.
             </p>
             {/* Social Icons */}
             <div className="flex gap-4">
@@ -39,9 +77,9 @@ const MainFooter = () => {
                 <Link
                   key={index}
                   href="#"
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-divider text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                  className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-slate-900 bg-white hover:bg-slate-900 hover:text-white transition-all duration-300"
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4" />
                 </Link>
               ))}
             </div>
@@ -51,7 +89,7 @@ const MainFooter = () => {
           <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
             {sections.map((section, idx) => (
               <div key={idx} className="space-y-6">
-                <h4 className="text-lg font-medium uppercase tracking-widest text-primary">
+                <h4 className="text-sm font-bold uppercase tracking-widest text-primary">
                   {section.title}
                 </h4>
                 <ul className="space-y-4">
@@ -59,7 +97,7 @@ const MainFooter = () => {
                     <li key={linkIdx}>
                       <Link
                         href={link.href}
-                        className="text-content-secondary hover:text-primary transition-colors duration-200"
+                        className="text-gray-500 hover:text-slate-900 transition-colors duration-200 text-sm"
                       >
                         {link.label}
                       </Link>
@@ -72,9 +110,9 @@ const MainFooter = () => {
         </div>
 
         {/* Bottom Section: Copyright and Payments */}
-        <div className="pt-8 border-t border-divider flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-content-secondary text-sm">
-            {t("rights")}
+        <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-gray-500 text-xs">
+            Clear Vein.COM &copy; 2000-2023, All Rights Reserved
           </p>
           
           {/* Payment Icons */}
@@ -82,7 +120,7 @@ const MainFooter = () => {
             {payments.map((payment) => (
               <div 
                 key={payment.name}
-                className="w-12 h-8 relative flex items-center justify-center rounded-md border border-divider bg-white p-1 transition-all cursor-default hover:shadow-sm"
+                className="w-10 h-6 relative flex items-center justify-center rounded-sm border border-gray-200 bg-white p-1 transition-all cursor-default hover:shadow-sm"
               >
                 <Image
                   src={payment.src}
@@ -97,5 +135,4 @@ const MainFooter = () => {
       </div>
     </footer>
   );
-};
-export default MainFooter;
+}
