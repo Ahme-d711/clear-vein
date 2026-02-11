@@ -30,7 +30,7 @@ export default function Hero() {
     ];
 
     return (
-        <section className="relative w-full overflow-hidden group">
+        <section className="relative w-full overflow-hidden group pt-24 bg-white">
             <Swiper
                 modules={[Navigation, Pagination, Autoplay, EffectFade]}
                 effect="fade"

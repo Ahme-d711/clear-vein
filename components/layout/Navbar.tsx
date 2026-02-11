@@ -44,12 +44,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Home", href: "#" },
     { label: "About Us", href: "#intro" },
-    { label: "Services", href: "#services" },
-    { label: "Our Background", href: "#about", className: "whitespace-nowrap" },
     { label: "Mission", href: "#mission" },
-    { label: "Stats", href: "#stats" },
+    { label: "Statistics", href: "#stats" },
     { label: "Contact Us", href: "#contact", className: "whitespace-nowrap" },
   ];
 
@@ -59,7 +56,7 @@ export default function Navbar() {
         transform: isMounted ? (isVisible ? "translateY(0)" : "translateY(-100%)") : "translateY(-100%)",
         opacity: isMounted ? 1 : 0,
       }}
-      className="fixed top-0 left-0 right-0 z-100 w-full border-b bg-background backdrop-blur-md transition-all duration-500 ease-in-out"
+      className="fixed top-0 left-0 right-0 z-100 w-full border-b bg-white/80 backdrop-blur-md transition-all duration-500 ease-in-out"
     >
       <div className="container mx-auto max-w-[1440px] flex h-24 items-center justify-between px-4 md:px-6"> 
         <div className="flex items-center gap-8">
