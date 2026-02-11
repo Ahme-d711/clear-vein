@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ChevronLeft } from "lucide-react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -51,7 +50,7 @@ export default function AboutSection() {
   const [swiperRef, setSwiperRef] = useState<any>(null);
 
   return (
-    <section className="relative bg-[#F3F7F9] py-24 lg:py-0 overflow-hidden">
+    <section className="relative bg-[#F3F7F9] overflow-hidden">
       <div className="container max-w-[1440px] mx-auto px-4 relative z-10">
         <div className="relative">
           <Swiper
@@ -68,7 +67,7 @@ export default function AboutSection() {
               clickable: true,
               el: ".custom-pagination",
               renderBullet: (index, className) => {
-                return `<span class="${className} w-3 h-3 rounded-full bg-gray-300 mx-1 cursor-pointer transition-all duration-300 [&.swiper-pagination-bullet-active]:w-8 [&.swiper-pagination-bullet-active]:bg-primary"></span>`;
+                return `<span class="${className} w-3 h-3 rounded-full bg-gray-300 mx-1 cursor-pointer transition-all duration-300"></span>`;
               },
             }}
           >
@@ -86,7 +85,7 @@ export default function AboutSection() {
                     </button>
 
                     {/* Text Content */}
-                    <div className="space-y-6">
+                    <div className="space-y-6 pb-12">
                       <h2 className="text-4xl lg:text-5xl font-extrabold text-[#005982] tracking-tight">
                         {slide.title}
                       </h2>
@@ -105,11 +104,6 @@ export default function AboutSection() {
                           {slide.content}
                         </p>
                       )}
-
-                      {/* Pagination below text */}
-                      <div className="pt-6">
-                        <div className="custom-pagination flex items-center h-4"></div>
-                      </div>
                     </div>
                   </div>
 
@@ -128,6 +122,10 @@ export default function AboutSection() {
                 </div>
               </SwiperSlide>
             ))}
+
+            {/* Stable Pagination Container - Positioned to align with the start of the text */}
+            {/* Offset: padding (16px) + chevron (48px) + gap (lg:48px / md:16px) */}
+            <div className="custom-pagination absolute bottom-4 lg:bottom-12 left-[80px] lg:left-[112px] z-20 flex items-center h-4"></div>
           </Swiper>
         </div>
       </div>
@@ -137,10 +135,12 @@ export default function AboutSection() {
           display: inline-block;
           border-radius: 9999px;
           transition: all 0.3s ease;
+          background-color: #D1D5DB !important;
+          opacity: 1 !important;
         }
         .custom-pagination .swiper-pagination-bullet-active {
           width: 2rem !important;
-          background-color: var(--color-primary, #005982) !important;
+          background-color: #005982 !important;
         }
       `}</style>
     </section>
