@@ -23,7 +23,7 @@ export default function Hero() {
         },
         {
             id: 2,
-            image: "/hero-1.svg",
+            image: "/approach.png",
             title: "Expert Care for Your Health",
             subtitle: "Advanced treatments and compassionate care from the leading vein specialists."
         },
@@ -77,7 +77,6 @@ export default function Hero() {
                                         {slide.subtitle}
                                     </p>
                                 </Fade>
-                                <Slide direction="up" triggerOnce delay={400} duration={800}>
                                     <div className="pt-4">
                                         <Button 
                                             className="h-14 px-12 rounded-2xl text-lg hover:border-none text-primary hover:text-white border-2 border-white shadow-xl cursor-pointer transition-all duration-500 hover:shadow-lg hover:scale-105 active:scale-95 bg-linear-to-r from-white via-white to-primary bg-size-[200%_100%] bg-left hover:bg-right"
@@ -85,7 +84,6 @@ export default function Hero() {
                                             Book Now
                                         </Button>
                                     </div>
-                                </Slide>
                             </div>
                         </div>
                     </SwiperSlide>

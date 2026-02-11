@@ -36,11 +36,13 @@ export default function OurBackground() {
   );
 
   return (
-    <InfoSection
-      title="Our Background"
-      description={description}
-      media={media}
-      imagePosition="right"
-    />
+    <div id="about">
+      <InfoSection
+        title="Our Background"
+        description={description}
+        media={media}
+        imagePosition="right"
+      />
+    </div>
   );
 }

@@ -73,7 +73,7 @@ export default function Introduction() {
   );
 
   return (
-    <>
+    <div id="intro">
       <InfoSection 
         title="Introduction"
         description={description}
@@ -88,6 +88,6 @@ export default function Introduction() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

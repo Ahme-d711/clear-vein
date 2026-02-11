@@ -51,7 +51,7 @@ export default function AboutSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative bg-[#F3F7F9] overflow-hidden py-16 lg:py-0">
+    <section id="mission" className="relative bg-[#F3F7F9] overflow-hidden py-16 lg:py-0">
       <div className="container max-w-[1440px] mx-auto px-4 relative z-10">
         <div className="relative">
           <Swiper

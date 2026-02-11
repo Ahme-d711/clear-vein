@@ -34,12 +34,14 @@ export default function OurApproach() {
   );
 
   return (
-    <InfoSection
-      title="Our Approach"
-      description={description}
-      media={media}
-      imagePosition="left"
-      bgColor="bg-gray-50/50"
-    />
+    <div id="services">
+      <InfoSection
+        title="Our Approach"
+        description={description}
+        media={media}
+        imagePosition="left"
+        bgColor="bg-gray-50/50"
+      />
+    </div>
   );
 }

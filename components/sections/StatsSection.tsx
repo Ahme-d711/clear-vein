@@ -27,7 +27,7 @@ import { Fade } from "react-awesome-reveal";
 
 export default function StatsSection() {
   return (
-    <section className="relative w-full overflow-hidden flex flex-col lg:flex-row">
+    <section id="stats" className="relative w-full overflow-hidden flex flex-col lg:flex-row">
       {stats.map((stat, idx) => (
         <Fade 
           key={stat.id} 
