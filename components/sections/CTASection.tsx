@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react"
-import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { 
@@ -14,6 +13,7 @@ import {
   Microscope,
   Bone
 } from "lucide-react"
+import { Zoom, Fade } from "react-awesome-reveal";
 
 const FloatingElement = ({ 
   children, 
@@ -28,26 +28,16 @@ const FloatingElement = ({
   delay?: number,
   duration?: number 
 }) => (
-  <motion.div
-    initial={{ y: 0 }}
-    animate={{ 
-      y: [0, -20, 0],
-      rotate: [0, 5, -5, 0]
-    }}
-    transition={{
-      duration,
-      repeat: Infinity,
-      ease: "easeInOut",
-      delay
-    }}
+  <div
     className={className}
-    style={style}
+    style={{
+      ...style,
+      animation: `float ${duration}s ease-in-out ${delay}s infinite`
+    }}
   >
     {children}
-  </motion.div>
+  </div>
 )
-
-import { Zoom, Fade } from "react-awesome-reveal";
 
 export default function CTASection() {
   const avatars = [
@@ -70,6 +60,14 @@ export default function CTASection() {
 
   return (
     <section className="relative py-32 bg-[#007095] overflow-hidden">
+      {/* CSS Animation Keyframes */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+      `}</style>
+
       {/* Background Orbs */}
       <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none" />
@@ -120,9 +118,10 @@ export default function CTASection() {
           <Fade direction="up" triggerOnce delay={400}>
             <div className="pt-4">
               <Button 
-                size="lg" 
-                className="px-12 py-8 text-xl rounded-2xl bg-white text-[#007095] hover:bg-blue-50 transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95 font-bold"
-              >
+              size="lg" 
+              className="px-12 py-8 text-xl rounded-2xl bg-white text-[#007095] hover:bg-blue-50 transition-all duration-300 shadow-xl hover:shadow-lg hover:scale-105 active:scale-95 font-bold"
+            >
+  
                 Talk to a Specialist
               </Button>
             </div>

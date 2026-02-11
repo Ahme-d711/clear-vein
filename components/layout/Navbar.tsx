@@ -40,7 +40,7 @@ export default function Navbar() {
           {/* Right: CTA Button */}
           <Button 
               variant="outline" 
-              className="border-primary bg-white h-10 text-primary hover:bg-primary hover:text-primary-foreground text-base font-medium leading-6 tracking-[0.5px] gap-2 cursor-pointer"
+              className="border-primary bg-white h-12 rounded-2xl text-primary hover:bg-primary hover:text-primary-foreground text-base font-medium leading-6 tracking-[0.5px] gap-2 cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-lg"
           >
               Booking Now
               <ArrowRight className="w-4 h-4" />
