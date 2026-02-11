@@ -42,9 +42,7 @@ export default function Hero() {
                 }}
                 pagination={{ 
                     clickable: true,
-                    el: ".custom-pagination",
-                    bulletClass: "swiper-pagination-bullet !bg-white !opacity-50 !w-3 !h-2 !rounded-full !mx-0 !transition-all !duration-300 !cursor-pointer",
-                    bulletActiveClass: "swiper-pagination-bullet-active !opacity-100 !w-12",
+                    el: ".hero-pagination",
                 }}
                 autoplay={{ delay: 5000, disableOnInteraction: false }}
                 loop={true}
@@ -85,6 +83,9 @@ export default function Hero() {
                         </div>
                     </SwiperSlide>
                 ))}
+
+                {/* Pagination Container - Centered using left-0 right-0 */}
+                <div className="hero-pagination absolute bottom-10 left-0 right-0 z-20 flex gap-2 justify-center" />
             </Swiper>
 
             {/* Navigation Controls */}
@@ -95,8 +96,22 @@ export default function Hero() {
                 <ChevronRight className="h-6 w-6" />
             </button>
 
-            {/* Pagination Container */}
-            <div className="custom-pagination absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-2" />
+            <style jsx global>{`
+                .hero-pagination .swiper-pagination-bullet {
+                    width: 12px !important;
+                    height: 8px !important;
+                    background-color: white !important;
+                    opacity: 0.5 !important;
+                    border-radius: 9999px !important;
+                    transition: all 0.3s ease !important;
+                    cursor: pointer !important;
+                    margin: 0 4px !important;
+                }
+                .hero-pagination .swiper-pagination-bullet-active {
+                    opacity: 1 !important;
+                    width: 48px !important;
+                }
+            `}</style>
         </section>
     );
 }
