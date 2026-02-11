@@ -3,12 +3,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { ChevronLeft } from "lucide-react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 const slides = [
@@ -48,14 +47,19 @@ const slides = [
 
 export default function AboutSection() {
   const [swiperRef, setSwiperRef] = useState<any>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative bg-[#F3F7F9] overflow-hidden">
+    <section className="relative bg-[#F3F7F9] overflow-hidden py-16 lg:py-0">
       <div className="container max-w-[1440px] mx-auto px-4 relative z-10">
         <div className="relative">
           <Swiper
-            modules={[Pagination, Navigation, Autoplay]}
-            onSwiper={setSwiperRef}
+            modules={[Navigation, Autoplay]}
+            onSwiper={(swiper) => {
+              setSwiperRef(swiper);
+              setActiveIndex(swiper.realIndex);
+            }}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             spaceBetween={50}
             slidesPerView={1}
             loop={true}
@@ -63,19 +67,12 @@ export default function AboutSection() {
               delay: 5000,
               disableOnInteraction: false,
             }}
-            pagination={{
-              clickable: true,
-              el: ".custom-pagination",
-              renderBullet: (index, className) => {
-                return `<span class="${className} w-3 h-3 rounded-full bg-gray-300 mx-1 cursor-pointer transition-all duration-300"></span>`;
-              },
-            }}
           >
-            {slides.map((slide) => (
+            {slides.map((slide, idx) => (
               <SwiperSlide key={slide.id}>
                 <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 min-h-[500px]">
                   {/* Left Navigation Arrow & Text Column */}
-                  <div className="flex items-center gap-4 lg:gap-12 w-full lg:w-1/2">
+                  <div className="flex items-start gap-4 lg:gap-12 w-full lg:w-1/2">
                     {/* Navigation Arrow on the Left */}
                     <button 
                       onClick={() => swiperRef?.slidePrev()}
@@ -85,7 +82,7 @@ export default function AboutSection() {
                     </button>
 
                     {/* Text Content */}
-                    <div className="space-y-6 pb-12">
+                    <div className="space-y-6">
                       <h2 className="text-4xl lg:text-5xl font-extrabold text-[#005982] tracking-tight">
                         {slide.title}
                       </h2>
@@ -104,6 +101,21 @@ export default function AboutSection() {
                           {slide.content}
                         </p>
                       )}
+
+                      {/* Custom Pagination Dots - Directly under text */}
+                      <div className="flex items-center gap-2 pt-8">
+                        {slides.map((_, dotIdx) => (
+                          <button
+                            key={dotIdx}
+                            onClick={() => swiperRef?.slideToLoop(dotIdx)}
+                            className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${
+                              activeIndex === dotIdx 
+                                ? "w-8 bg-[#005982]" 
+                                : "w-3 bg-gray-300 hover:bg-gray-400"
+                            }`}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -122,27 +134,9 @@ export default function AboutSection() {
                 </div>
               </SwiperSlide>
             ))}
-
-            {/* Stable Pagination Container - Positioned to align with the start of the text */}
-            {/* Offset: padding (16px) + chevron (48px) + gap (lg:48px / md:16px) */}
-            <div className="custom-pagination absolute bottom-4 lg:bottom-12 left-[80px] lg:left-[112px] z-20 flex items-center h-4"></div>
           </Swiper>
         </div>
       </div>
-
-      <style jsx global>{`
-        .custom-pagination .swiper-pagination-bullet {
-          display: inline-block;
-          border-radius: 9999px;
-          transition: all 0.3s ease;
-          background-color: #D1D5DB !important;
-          opacity: 1 !important;
-        }
-        .custom-pagination .swiper-pagination-bullet-active {
-          width: 2rem !important;
-          background-color: #005982 !important;
-        }
-      `}</style>
     </section>
   );
 }
