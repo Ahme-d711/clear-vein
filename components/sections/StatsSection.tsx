@@ -28,12 +28,15 @@ import { Fade } from "react-awesome-reveal";
 export default function StatsSection() {
   return (
     <section className="relative w-full overflow-hidden flex flex-col lg:flex-row">
-      <Fade cascade damping={0.2} triggerOnce direction="up">
-        {stats.map((stat) => (
-          <div 
-            key={stat.id} 
-            className="relative flex-1 h-[400px] lg:h-[500px] overflow-hidden group cursor-pointer"
-          >
+      {stats.map((stat, idx) => (
+        <Fade 
+          key={stat.id} 
+          triggerOnce 
+          direction="up" 
+          delay={idx * 200}
+          className="flex-1"
+        >
+          <div className="relative h-[400px] lg:h-[500px] overflow-hidden group cursor-pointer">
             {/* Background Image Container with Zoom effect */}
             <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
               <Image
@@ -57,8 +60,8 @@ export default function StatsSection() {
               </p>
             </div>
           </div>
-        ))}
-      </Fade>
+        </Fade>
+      ))}
     </section>
   );
 }

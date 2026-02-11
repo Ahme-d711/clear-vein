@@ -73,7 +73,7 @@ export default function AboutSection() {
               <SwiperSlide key={slide.id}>
                 <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 min-h-[500px]">
                   {/* Left Navigation Arrow & Text Column */}
-                  <div className="flex items-start gap-4 lg:gap-12 w-full lg:w-1/2">
+                  <div className="flex items-center gap-4 lg:gap-12 w-full lg:w-1/2">
                     <Fade direction="left" triggerOnce duration={1000} className="shrink-0 mt-2">
                       {/* Navigation Arrow on the Left */}
                       <button 

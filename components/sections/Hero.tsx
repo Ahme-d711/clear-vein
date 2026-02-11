@@ -5,7 +5,6 @@ import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Fade, Slide } from "react-awesome-reveal";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -67,25 +66,19 @@ export default function Hero() {
 
                             {/* Content Overlay */}
                             <div className="container mx-auto px-4 max-w-7xl space-y-6">
-                                <Fade direction="up" triggerOnce duration={1000}>
-                                    <h1 className="text-4xl md:text-5xl font-bold tracking-wider leading-[.8]">
-                                        {slide.title}
-                                    </h1>
-                                </Fade>
-                                <Fade direction="up" triggerOnce delay={200} duration={1000}>
-                                    <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto">
-                                        {slide.subtitle}
-                                    </p>
-                                </Fade>
-                                <Slide direction="up" triggerOnce delay={400} duration={800}>
-                                    <div className="pt-4">
-                                        <Button 
-                                            className="h-14 px-12 rounded-2xl bg-white text-primary hover:bg-white/90 text-lg font-bold shadow-xl border-none cursor-pointer"
-                                        >
-                                            Book Now
-                                        </Button>
-                                    </div>
-                                </Slide>
+                                <h1 className="text-4xl md:text-5xl font-bold tracking-wider leading-[.8] animate-in fade-in slide-in-from-bottom-5 duration-700">
+                                    {slide.title}
+                                </h1>
+                                <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
+                                    {slide.subtitle}
+                                </p>
+                                <div className="pt-4 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-300">
+                                    <Button 
+                                        className="h-14 px-12 rounded-2xl bg-white text-primary hover:bg-white/90 text-lg font-bold shadow-xl border-none cursor-pointer"
+                                    >
+                                        Book Now
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
