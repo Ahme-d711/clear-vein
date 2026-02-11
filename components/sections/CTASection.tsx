@@ -47,6 +47,8 @@ const FloatingElement = ({
   </motion.div>
 )
 
+import { Zoom, Fade } from "react-awesome-reveal";
+
 export default function CTASection() {
   const avatars = [
     { src: "/avatars/doctor-1.png", top: "15%", left: "10%", size: "w-16 h-16", delay: 0 },
@@ -77,7 +79,7 @@ export default function CTASection() {
         <FloatingElement
           key={`avatar-${idx}`}
           className="absolute hidden md:block z-10"
-          style={{ ...avatar }}
+          style={{ ...avatar } as any}
           delay={avatar.delay}
         >
           <Avatar className={`${avatar.size} border-2 border-white/50 shadow-xl`}>
@@ -92,7 +94,7 @@ export default function CTASection() {
         <FloatingElement
           key={`icon-${idx}`}
           className="absolute hidden lg:block pointer-events-none"
-          style={{ ...item }}
+          style={{ ...item } as any}
           delay={item.delay}
           duration={6}
         >
@@ -102,34 +104,29 @@ export default function CTASection() {
 
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-3xl mx-auto text-center space-y-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-4"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.1]">
-              Caring for Your Veins, <br />
-              <span className="text-blue-100">Caring for You</span>
-            </h2>
-            <p className="text-xl text-blue-50/80 leading-relaxed max-w-2xl mx-auto">
-              Comprehensive vascular assessment and treatment delivered according 
-              to international medical standards and best clinical practices.
-            </p>
-          </motion.div>
+          <Zoom triggerOnce duration={800}>
+            <div className="space-y-4">
+              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.1]">
+                Caring for Your Veins, <br />
+                <span className="text-blue-100">Caring for You</span>
+              </h2>
+              <p className="text-xl text-blue-50/80 leading-relaxed max-w-2xl mx-auto">
+                Comprehensive vascular assessment and treatment delivered according 
+                to international medical standards and best clinical practices.
+              </p>
+            </div>
+          </Zoom>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <Button 
-              size="lg" 
-              className="px-12 py-8 text-xl rounded-2xl bg-white text-[#007095] hover:bg-blue-50 transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95 font-bold"
-            >
-              Talk to a Specialist
-            </Button>
-          </motion.div>
+          <Fade direction="up" triggerOnce delay={400}>
+            <div className="pt-4">
+              <Button 
+                size="lg" 
+                className="px-12 py-8 text-xl rounded-2xl bg-white text-[#007095] hover:bg-blue-50 transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95 font-bold"
+              >
+                Talk to a Specialist
+              </Button>
+            </div>
+          </Fade>
         </div>
       </div>
     </section>
