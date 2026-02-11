@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import Introduction from "@/components/sections/Introduction";
+import AboutSection from "@/components/sections/AboutSection";
 import OurApproach from "@/components/sections/OurApproach";
 import OurBackground from "@/components/sections/OurBackground";
 import CTASection from "@/components/sections/CTASection";
@@ -12,6 +13,7 @@ export default function Home() {
       <OurApproach />
       <OurBackground />
       <CTASection />
+      <AboutSection />
     </main>
   );
 }
