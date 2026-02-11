@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { ChevronLeft } from "lucide-react";
+import { Fade } from "react-awesome-reveal";
 
 // Import Swiper styles
 import "swiper/css";
@@ -73,63 +74,69 @@ export default function AboutSection() {
                 <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 min-h-[500px]">
                   {/* Left Navigation Arrow & Text Column */}
                   <div className="flex items-start gap-4 lg:gap-12 w-full lg:w-1/2">
-                    {/* Navigation Arrow on the Left */}
-                    <button 
-                      onClick={() => swiperRef?.slidePrev()}
-                      className="text-primary hover:scale-110 transition-transform cursor-pointer mt-2 shrink-0"
-                    >
-                      <ChevronLeft size={48} strokeWidth={2.5} />
-                    </button>
+                    <Fade direction="left" triggerOnce duration={1000} className="shrink-0 mt-2">
+                      {/* Navigation Arrow on the Left */}
+                      <button 
+                        onClick={() => swiperRef?.slidePrev()}
+                        className="text-primary hover:scale-110 transition-transform cursor-pointer"
+                      >
+                        <ChevronLeft size={48} strokeWidth={2.5} />
+                      </button>
+                    </Fade>
 
                     {/* Text Content */}
-                    <div className="space-y-6">
-                      <h2 className="text-4xl lg:text-5xl font-extrabold text-[#005982] tracking-tight">
-                        {slide.title}
-                      </h2>
-                      
-                      {slide.type === "list" ? (
-                        <ul className="space-y-4">
-                          {slide.items?.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-3 text-lg text-gray-700 leading-relaxed font-medium">
-                              <span className="w-2 h-2 rounded-full bg-primary mt-3 shrink-0" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p className="text-xl text-gray-700 leading-relaxed font-medium">
-                          {slide.content}
-                        </p>
-                      )}
+                    <Fade direction="up" triggerOnce duration={1000} className="w-full">
+                      <div className="space-y-6">
+                        <h2 className="text-4xl lg:text-5xl font-extrabold text-[#005982] tracking-tight">
+                          {slide.title}
+                        </h2>
+                        
+                        {slide.type === "list" ? (
+                          <ul className="space-y-4">
+                            {slide.items?.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-3 text-lg text-gray-700 leading-relaxed font-medium">
+                                <span className="w-2 h-2 rounded-full bg-primary mt-3 shrink-0" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-xl text-gray-700 leading-relaxed font-medium">
+                            {slide.content}
+                          </p>
+                        )}
 
-                      {/* Custom Pagination Dots - Directly under text */}
-                      <div className="flex items-center gap-2 pt-8">
-                        {slides.map((_, dotIdx) => (
-                          <button
-                            key={dotIdx}
-                            onClick={() => swiperRef?.slideToLoop(dotIdx)}
-                            className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${
-                              activeIndex === dotIdx 
-                                ? "w-8 bg-[#005982]" 
-                                : "w-3 bg-gray-300 hover:bg-gray-400"
-                            }`}
-                          />
-                        ))}
+                        {/* Custom Pagination Dots - Directly under text */}
+                        <div className="flex items-center gap-2 pt-8">
+                          {slides.map((_, dotIdx) => (
+                            <button
+                              key={dotIdx}
+                              onClick={() => swiperRef?.slideToLoop(dotIdx)}
+                              className={`h-3 rounded-full transition-all duration-300 cursor-pointer ${
+                                activeIndex === dotIdx 
+                                  ? "w-8 bg-[#005982]" 
+                                  : "w-3 bg-gray-300 hover:bg-gray-400"
+                              }`}
+                            />
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    </Fade>
                   </div>
 
                   {/* About Image Component (Integrated from about.svg) */}
                   <div className="w-full lg:w-1/2 flex justify-center items-center">
-                    <div className="relative w-full aspect-square max-w-[600px] lg:h-[600px]">
-                      <Image
-                        src="/about.svg"
-                        alt="About visual representation"
-                        fill
-                        className="object-contain"
-                        priority
-                      />
-                    </div>
+                    <Fade direction="right" triggerOnce duration={1000} className="w-full">
+                      <div className="relative w-full aspect-square max-w-[600px] lg:h-[600px]">
+                        <Image
+                          src="/about.svg"
+                          alt="About visual representation"
+                          fill
+                          className="object-contain"
+                          priority
+                        />
+                      </div>
+                    </Fade>
                   </div>
                 </div>
               </SwiperSlide>
