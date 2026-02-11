@@ -14,6 +14,7 @@ import {
   Bone
 } from "lucide-react"
 import { Zoom, Fade } from "react-awesome-reveal";
+import { openWhatsApp } from "@/lib/whatsapp"
 
 const FloatingElement = ({ 
   children, 
@@ -119,6 +120,7 @@ export default function CTASection() {
             <div className="pt-4">
               <Button 
               size="lg" 
+              onClick={() => openWhatsApp()}
               className="px-12 py-8 text-xl rounded-2xl hover:border-none text-[#007095] hover:text-white border-2 border-white shadow-xl cursor-pointer transition-all duration-500 hover:shadow-lg hover:scale-105 active:scale-95 font-bold bg-linear-to-r from-white via-white to-[#007095] bg-size-[200%_100%] bg-left hover:bg-right"
             >
   

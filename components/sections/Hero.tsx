@@ -5,7 +5,8 @@ import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Fade, Slide } from "react-awesome-reveal";
+import { Fade } from "react-awesome-reveal";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -78,7 +79,8 @@ export default function Hero() {
                                     </p>
                                 </Fade>
                                     <div className="pt-4">
-                                        <Button 
+                                        <Button
+                                            onClick={() => openWhatsApp()}
                                             className="h-14 px-12 rounded-2xl text-lg hover:border-none text-primary hover:text-white border-2 border-white shadow-xl cursor-pointer transition-all duration-500 hover:shadow-lg hover:scale-105 active:scale-95 bg-linear-to-r from-white via-white to-primary bg-size-[200%_100%] bg-left hover:bg-right"
                                         >
                                             Book Now

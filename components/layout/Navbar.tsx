@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
@@ -109,7 +110,8 @@ export default function Navbar() {
           {/* Right: CTA Button (Desktop) + Menu Icon (Mobile) */}
           <div className="flex items-center gap-4">
             <Button 
-                variant="outline" 
+                variant="outline"
+                onClick={() => openWhatsApp()}
                 className="hidden lg:flex border-primary h-12 px-8 rounded-2xl text-primary hover:text-white hover:border-none text-base font-medium leading-6 tracking-[0.5px] gap-2 cursor-pointer transition-all duration-500 hover:scale-105 active:scale-95 hover:shadow-lg bg-linear-to-r from-white via-white to-primary bg-size-[200%_100%] bg-left hover:bg-right"
             >
                 Booking Now
@@ -130,7 +132,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-[90] lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-90 lg:hidden transition-opacity duration-300 ${
           isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setIsMenuOpen(false)}
@@ -138,7 +140,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Panel */}
       <div 
-        className={`fixed top-24 left-0 right-0 bg-white shadow-2xl z-[95] lg:hidden transition-all duration-500 ease-in-out ${
+        className={`fixed top-24 left-0 right-0 bg-white shadow-2xl z-95 lg:hidden transition-all duration-500 ease-in-out ${
           isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
         }`}
       >
@@ -168,9 +170,12 @@ export default function Navbar() {
           {/* Mobile CTA Button */}
           <Fade direction="up" delay={navLinks.length * 100} duration={400} triggerOnce={false}>
             <Button 
-                variant="outline" 
+                variant="outline"
+                onClick={() => {
+                  handleLinkClick();
+                  openWhatsApp();
+                }}
                 className="w-full border-primary h-14 px-8 rounded-2xl text-primary hover:text-white hover:border-none text-lg font-medium gap-2 cursor-pointer transition-all duration-500 hover:scale-105 active:scale-95 hover:shadow-lg bg-linear-to-r from-white via-white to-primary bg-size-[200%_100%] bg-left hover:bg-right"
-                onClick={handleLinkClick}
             >
                 Booking Now
                 <ArrowRight className="w-5 h-5" />
