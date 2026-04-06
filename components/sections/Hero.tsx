@@ -1,124 +1,81 @@
 "use client"
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
 import { openWhatsApp } from "@/lib/whatsapp";
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import "swiper/css/effect-fade";
-
 export default function Hero() {
-    const slides = [
-        {
-            id: 1,
-            image: "/hero-1.svg",
-            title: "Compassionate Care for Healthier Veins",
-            subtitle: "What happens beneath the surface matters — precise understanding leads to better vein care"
-        },
-        {
-            id: 2,
-            image: "/approach.png",
-            title: "Expert Care for Your Health",
-            subtitle: "Advanced treatments and compassionate care from the leading vein specialists."
-        },
-    ];
-
     return (
-        <section className="relative w-full overflow-hidden group pt-24 bg-white">
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay, EffectFade]}
-                effect="fade"
-                speed={1000}
-                spaceBetween={0}
-                slidesPerView={1}
-                navigation={{
-                    nextEl: ".hero-next",
-                    prevEl: ".hero-prev",
-                }}
-                pagination={{ 
-                    clickable: true,
-                    el: ".hero-pagination",
-                }}
-                autoplay={{ delay: 5000, disableOnInteraction: false }}
-                loop={true}
-                className="hero-swiper w-full aspect-1440/640 h-auto min-h-[400px] max-h-[700px]"
-            >
-                {slides.map((slide) => (
-                    <SwiperSlide key={slide.id}>
-                        <div className="relative h-full w-full flex items-center justify-center text-center text-white">
-                            {/* Background Image */}
-                            <div className="absolute inset-0 -z-10 bg-background">
-                                <Image
-                                    src={slide.image}
-                                    alt={slide.title}
-                                    fill
-                                    className="object-cover object-top"
-                                    priority
-                                />
-                                {/* Dark Overlay for readability */}
-                                <div className="absolute inset-0 bg-black/20" />
-                            </div>
+        <section className="relative w-full min-h-[600px] lg:h-[93vh] flex items-center overflow-hidden pt-20">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/hero.svg"
+                    alt="Specialist Vascular Clinic"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                {/* Premium Dark Blue Gradient Overlay */}
+                <div className="absolute inset-0 bg-linear-to-r from-[#002045] to-[#00204500]" />
+            </div>
 
-                            {/* Content Overlay */}
-                            <div className="container mx-auto px-4 max-w-7xl space-y-6">
-                                <Fade direction="up" triggerOnce duration={1000}>
-                                    <h1 className="text-4xl md:text-5xl font-bold tracking-wider leading-[.8]">
-                                        {slide.title}
-                                    </h1>
-                                </Fade>
-                                <Fade direction="up" triggerOnce delay={200} duration={1000}>
-                                    <p className="text-lg md:text-xl opacity-90 max-w-3xl mx-auto">
-                                        {slide.subtitle}
-                                    </p>
-                                </Fade>
-                                    <div className="pt-4">
-                                        <Button
-                                            onClick={() => openWhatsApp()}
-                                            className="h-14 px-12 rounded-2xl text-lg hover:border-none text-primary hover:text-white border-2 border-white shadow-xl cursor-pointer transition-all duration-500 hover:shadow-lg hover:scale-105 active:scale-95 bg-linear-to-r from-white via-white to-primary bg-size-[200%_100%] bg-left hover:bg-right"
-                                        >
-                                            Book Now
-                                        </Button>
-                                    </div>
-                            </div>
+            <div className="container relative z-10 mx-auto px-6 lg:px-12 max-w-7xl">
+                <div className="max-w-3xl space-y-8">
+                    {/* Badge */}
+                    <Fade direction="up" triggerOnce duration={800}>
+                        <div className="inline-block">
+                            <span className="px-3 py-1 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-white/90 bg-white/10 backdrop-blur-md border border-white/20 rounded-md uppercase">
+                                Specialist Vascular Clinic
+                            </span>
                         </div>
-                    </SwiperSlide>
-                ))}
+                    </Fade>
 
-                {/* Pagination Container - Centered using left-0 right-0 */}
-                <div className="hero-pagination absolute bottom-10 left-0 right-0 z-20 flex gap-2 justify-center" />
-            </Swiper>
+                    {/* Headline */}
+                    <Fade direction="up" triggerOnce delay={100} duration={800}>
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+                            Consultant-Led<br />
+                            Vein Care in<br />
+                            Dublin
+                        </h1>
+                    </Fade>
 
-            {/* Navigation Controls */}
-            <button className="hero-prev absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 text-white border border-white/20 transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm cursor-pointer">
-                <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button className="hero-next absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 flex items-center justify-center rounded-full bg-black/10 hover:bg-black/20 text-white border border-white/20 transition-all opacity-0 group-hover:opacity-100 backdrop-blur-sm cursor-pointer">
-                <ChevronRight className="h-6 w-6" />
-            </button>
+                    {/* Subheadline and Description */}
+                    <div className="space-y-4 max-w-2xl">
+                        <Fade direction="up" triggerOnce delay={200} duration={800}>
+                            <h2 className="text-xl md:text-2xl font-semibold text-white/90">
+                                Clear Vein Clinic – Founded by Dr Ahmed Hassanin
+                            </h2>
+                        </Fade>
+                        <Fade direction="up" triggerOnce delay={300} duration={800}>
+                            <p className="text-base md:text-lg text-white/70 leading-relaxed font-light">
+                                Specialist assessment and minimally invasive treatment delivered by a 
+                                Consultant Vascular Surgeon in a state-of-the-art clinical setting.
+                            </p>
+                        </Fade>
+                    </div>
 
-            <style jsx global>{`
-                .hero-pagination .swiper-pagination-bullet {
-                    width: 12px !important;
-                    height: 8px !important;
-                    background-color: white !important;
-                    opacity: 0.5 !important;
-                    border-radius: 9999px !important;
-                    transition: all 0.3s ease !important;
-                    cursor: pointer !important;
-                    margin: 0 4px !important;
-                }
-                .hero-pagination .swiper-pagination-bullet-active {
-                    opacity: 1 !important;
-                    width: 48px !important;
-                }
-            `}</style>
+                    {/* Action Buttons */}
+                    <Fade direction="up" triggerOnce delay={400} duration={800}>
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                            <Button
+                                onClick={() => openWhatsApp()}
+                                className="h-14 px-8 rounded-md text-base font-bold bg-white text-[#002045] hover:bg-gray-100 transition-all duration-300"
+                            >
+                                Book Consultation
+                            </Button>
+                            <Button
+                                variant="outline"
+                                className="h-14 px-8 rounded-md text-base font-semibold border-2 border-white/30 text-white bg-transparent hover:bg-white/10 transition-all duration-300"
+                            >
+                                Learn More
+                            </Button>
+                        </div>
+                    </Fade>
+                </div>
+            </div>
         </section>
     );
 }
+
