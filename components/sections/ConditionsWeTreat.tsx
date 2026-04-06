@@ -1,6 +1,7 @@
 "use client"
 
 import { Fade } from "react-awesome-reveal";
+import Image from "next/image";
 import { Activity, Stethoscope, Zap, RotateCcw, PlusSquare } from "lucide-react";
 
 const conditions = [
@@ -47,29 +48,46 @@ export default function ConditionsWeTreat() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {conditions.map((condition, index) => (
-                        <Fade 
-                            key={condition.title} 
-                            direction="up" 
-                            triggerOnce 
-                            delay={index * 100} 
-                            duration={800}
-                        >
-                            <div className="bg-[#EFF4FF] p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 h-full flex flex-col space-y-6">
-                                <div className="p-3 bg-[#F8F9FF] rounded-lg w-fit">
-                                    {condition.icon}
+                    {conditions.map((condition, index) => {
+                        const isLast = index === conditions.length - 1;
+                        return (
+                            <Fade 
+                                key={condition.title} 
+                                direction="up" 
+                                triggerOnce 
+                                delay={index * 100} 
+                                duration={800}
+                                className={isLast ? "lg:col-span-2" : ""}
+                            >
+                                <div className={`bg-[#EFF4FF] p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 h-full flex flex-col lg:flex-row gap-8 ${isLast ? "items-center" : "space-y-6"}`}>
+                                    <div className={`flex flex-col space-y-6 ${isLast ? "flex-1" : ""}`}>
+                                        <div className="p-3 bg-white rounded-lg w-fit">
+                                            {condition.icon}
+                                        </div>
+                                        <div className="space-y-3">
+                                            <h3 className="text-xl font-bold text-primary">
+                                                {condition.title}
+                                            </h3>
+                                            <p className="text-[#505F76] leading-relaxed font-light">
+                                                {condition.description}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {isLast && (
+                                        <div className="flex-1 relative w-full aspect-video lg:aspect-auto lg:h-full min-h-[200px] rounded-xl overflow-hidden shadow-lg border border-white/50">
+                                            <Image 
+                                                src="/ultrasound.png" 
+                                                alt="Venous Ultrasound Diagnostic" 
+                                                fill 
+                                                className="object-cover"
+                                            />
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="space-y-3">
-                                    <h3 className="text-xl font-bold text-primary">
-                                        {condition.title}
-                                    </h3>
-                                    <p className="text-[#505F76] leading-relaxed font-light">
-                                        {condition.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </Fade>
-                    ))}
+                            </Fade>
+                        );
+                    })}
                 </div>
             </div>
         </section>
