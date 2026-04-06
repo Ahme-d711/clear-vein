@@ -1,13 +1,13 @@
 import Hero from "@/components/sections/Hero";
-import StatsSection from "@/components/sections/StatsSection";
-import AboutSection from "@/components/sections/AboutSection";
+import ServicesOverview from "@/components/sections/ServicesOverview";
+import DoctorProfile from "@/components/sections/DoctorProfile";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <AboutSection />
-      <StatsSection />
+      <ServicesOverview />
+      <DoctorProfile />
     </main>
   );
 }
