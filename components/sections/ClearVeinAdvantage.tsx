@@ -6,6 +6,10 @@ import { CheckCircle2 } from "lucide-react";
 
 const advantages = [
     {
+        title: "Consultant-delivered Care",
+        description: "Your entire journey, from first scan to final treatment, is personally managed by Dr Hassanin.",
+    },
+    {
         title: "Duplex Ultrasound Included",
         description: "Gold-standard diagnostic imaging performed at the initial consultation for precise planning.",
     },
@@ -30,19 +34,17 @@ export default function ClearVeinAdvantage() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                     
                     {/* Left Column: Content */}
-                    <div className="space-y-12">
+                    <div className="space-y-16">
                         <Fade direction="up" triggerOnce duration={800}>
-                            <div className="space-y-4">
-                                <span className="text-xs font-bold tracking-[0.3em] text-[#0084a9] uppercase">
-                                    Why Choose Us
-                                </span>
-                                <h2 className="text-4xl md:text-5xl font-bold text-[#002045] leading-tight">
-                                    The Clear Vein Advantage
-                                </h2>
-                            </div>
+                            <h2 className="text-2xl md:text-4xl font-extrabold text-primary leading-tight">
+                                The Clear Vein Advantage
+                            </h2>
                         </Fade>
 
-                        <div className="space-y-8">
+                        <div className="relative space-y-12">
+                            {/* Vertical Line */}
+                            <div className="absolute left-[11px] top-6 bottom-6 w-[2px] bg-primary/10" />
+
                             {advantages.map((item, index) => (
                                 <Fade 
                                     key={item.title} 
@@ -51,15 +53,17 @@ export default function ClearVeinAdvantage() {
                                     delay={index * 100} 
                                     duration={800}
                                 >
-                                    <div className="flex gap-4 items-start">
-                                        <div className="mt-1 shrink-0">
-                                            <CheckCircle2 className="w-6 h-6 text-[#0084a9]" />
+                                    <div className="relative flex gap-8 items-start group">
+                                        {/* Bullet */}
+                                        <div className="z-10 w-[24px] h-[24px] rounded-full bg-primary flex items-center justify-center mt-1.5 shrink-0 shadow-lg shadow-primary/20">
+                                            <div className="w-[6px] h-[6px] bg-white rounded-full" />
                                         </div>
-                                        <div className="space-y-1">
-                                            <h3 className="text-xl font-bold text-[#002045]">
+                                        
+                                        <div className="space-y-2">
+                                            <h3 className="text-xl font-bold text-primary">
                                                 {item.title}
                                             </h3>
-                                            <p className="text-[#505F76] font-light leading-relaxed">
+                                            <p className="text-[#505F76] font-normal leading-relaxed text-[15.5px] max-w-lg">
                                                 {item.description}
                                             </p>
                                         </div>
@@ -70,9 +74,9 @@ export default function ClearVeinAdvantage() {
                     </div>
 
                     {/* Right Column: Image and Badge */}
-                    <div className="relative">
+                    <div className="relative bg-[#DDE9FF] p-3 rounded-2xl">
                         <Fade direction="right" triggerOnce duration={1000}>
-                            <div className="relative aspect-4/3 w-full rounded-2xl shadow-2xl">
+                            <div className="relative aspect-3/3 w-full rounded-2xl shadow-2xl">
                                 <Image
                                     src="/reception.png"
                                     alt="Modern Clinical Reception"
