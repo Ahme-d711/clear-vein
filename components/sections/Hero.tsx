@@ -26,7 +26,7 @@ export default function Hero() {
                     {/* Badge */}
                     <Fade direction="up" triggerOnce duration={800}>
                         <div className="inline-block">
-                            <span className="px-3 py-1 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-white/90 bg-white/10 backdrop-blur-md border border-white/20 rounded-md uppercase">
+                            <span className="px-3 py-1 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#ADC7F7] backdrop-blur-md border border-[#ADC7F74D] rounded-md uppercase">
                                 Specialist Vascular Clinic
                             </span>
                         </div>
@@ -44,12 +44,12 @@ export default function Hero() {
                     {/* Subheadline and Description */}
                     <div className="space-y-4 max-w-2xl">
                         <Fade direction="up" triggerOnce delay={200} duration={800}>
-                            <h2 className="text-xl md:text-2xl font-semibold text-white/90">
+                            <h2 className="text-xl md:text-2xl font-semibold text-[#86A0CD]">
                                 Clear Vein Clinic – Founded by Dr Ahmed Hassanin
                             </h2>
                         </Fade>
                         <Fade direction="up" triggerOnce delay={300} duration={800}>
-                            <p className="text-base md:text-lg text-white/70 leading-relaxed font-light">
+                            <p className="text-base md:text-lg text-white/80 leading-relaxed font-light">
                                 Specialist assessment and minimally invasive treatment delivered by a 
                                 Consultant Vascular Surgeon in a state-of-the-art clinical setting.
                             </p>
@@ -61,13 +61,14 @@ export default function Hero() {
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
                             <Button
                                 onClick={() => openWhatsApp()}
-                                className="h-14 px-8 rounded-md text-base font-bold bg-white text-[#002045] hover:bg-gray-100 transition-all duration-300"
+                                variant="outline"
+                                size="xl"
                             >
                                 Book Consultation
                             </Button>
                             <Button
-                                variant="outline"
-                                className="h-14 px-8 rounded-md text-base font-semibold border-2 border-white/30 text-white bg-transparent hover:bg-white/10 transition-all duration-300"
+                                variant="ghost"
+                                size="xl"
                             >
                                 Learn More
                             </Button>
