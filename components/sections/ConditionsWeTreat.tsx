@@ -77,7 +77,7 @@ export default function ConditionsWeTreat() {
                                     {isLast && (
                                         <div className="flex-1 relative w-full aspect-video lg:aspect-auto lg:h-full min-h-[200px] rounded-xl overflow-hidden shadow-lg border border-white/50">
                                             <Image 
-                                                src="/ultrasound.png" 
+                                                src="/venous-ulcers.svg" 
                                                 alt="Venous Ultrasound Diagnostic" 
                                                 fill 
                                                 className="object-cover"
