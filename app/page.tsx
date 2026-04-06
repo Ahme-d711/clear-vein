@@ -3,6 +3,7 @@ import ServicesOverview from "@/components/sections/ServicesOverview";
 import DoctorProfile from "@/components/sections/DoctorProfile";
 import ConditionsWeTreat from "@/components/sections/ConditionsWeTreat";
 import AdvancedTreatments from "@/components/sections/AdvancedTreatments";
+import ClearVeinAdvantage from "@/components/sections/ClearVeinAdvantage";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <DoctorProfile />
       <ConditionsWeTreat />
       <AdvancedTreatments />
+      <ClearVeinAdvantage />
     </main>
   );
 }
