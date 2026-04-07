@@ -97,7 +97,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "HOME", href: "/" },
-    { label: "ABOUT DR HASSANIN", href: "/#about" },
+    { label: "ABOUT DR HASSANIN", href: "/about" },
     { label: "VEIN CONDITIONS", href: "/#conditions" },
     { label: "TREATMENTS", href: "/#treatments" },
     { label: "FEES", href: "/#fees" },
