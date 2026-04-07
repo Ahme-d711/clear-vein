@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google"; // Removed Geist imports
+import { Reem_Kufi } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-// Removed Geist font configurations
-
-const roboto = Roboto({
-  weight: ["400", "500","600", "700"], // Added regular and medium weights as well
-  variable: "--font-roboto",
-  subsets: ["latin"],
+const reemKufi = Reem_Kufi({
+  subsets: ["latin", "arabic"],
+  variable: "--font-reem-kufi",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} antialiased font-sans`} // Added font-sans class
+        className={`${reemKufi.variable} antialiased font-sans`} // Added font-sans class
       >
         <Toaster position="top-center" reverseOrder={false} />
         <Navbar />

@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-roboto);
+  --font-sans: var(--font-reem-kufi);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);

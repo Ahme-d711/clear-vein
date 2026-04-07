@@ -49,7 +49,7 @@ export default function MainFooter() {
                       <li key={linkIdx}>
                         <Link
                           href={link.href}
-                          className="text-[#64748B] hover:text-primary transition-colors duration-200 text-sm"
+                          className="text-[#64748B] hover:text-primary underline transition-colors duration-200 text-sm"
                         >
                           {link.label}
                         </Link>
@@ -64,9 +64,10 @@ export default function MainFooter() {
 
         {/* Bottom Section: Copyright */}
         <Fade triggerOnce delay={500}>
-              <p className="text-primary text-sm font-medium">
-                © 2024 Clear Vein Clinic. Dr Ahmed Hassanin (PhD, EBVS, CSD). IMC Statement: Registered
-                Specialist.                
+              <p className="text-primary text-sm font-medium max-w-xl">
+                © 2024 Clear Vein Clinic. Mr. Ahmed Hassanin is registered on the Specialist Division of the Irish
+                Medical Council (Vascular Surgery) and practises in accordance with professional standards and
+                clinical guidelines.             
               </p>
         </Fade>
       </div>

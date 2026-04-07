@@ -25,7 +25,7 @@ const PILLARS = [
 
 export default function StandardsOfCare() {
     return (
-        <section className="py-20 bg-primary relative overflow-hidden">
+        <section className="py-24 min-h-screen bg-primary relative overflow-hidden">
             {/* Background Decorative Element */}
             <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] border border-white rounded-full bg-radial from-white to-transparent" />
@@ -47,7 +47,7 @@ export default function StandardsOfCare() {
                     {/* Central Vertical Line */}
                     <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/20 -translate-x-1/2 hidden lg:block" />
 
-                    <div className="space-y-6">
+                    <div className="space-y-14">
                         {PILLARS.map((pillar, idx) => (
                             <div key={idx} className="relative py-2">
                                 {/* Desktop Layout */}
