@@ -47,8 +47,13 @@ export default function Navbar() {
 
   // Intersection Observer for Active Section
   useEffect(() => {
-    const sections = ["HOME", "ABOUT DR HASSANIN", "VEIN CONDITIONS", "TREATMENTS", "FEES", "CONTACT"];
-    const sectionIds = ["", "about", "conditions", "treatments", "fees", "contact"];
+    const navItems = [
+      { label: "HOME", id: "hero" },
+      { label: "ABOUT DR HASSANIN", id: "about" },
+      { label: "VEIN CONDITIONS", id: "conditions" },
+      { label: "TREATMENTS", id: "treatments" },
+      { label: "FEES", id: "fees" },
+    ];
 
     const observerOptions = {
       root: null,
@@ -59,9 +64,9 @@ export default function Navbar() {
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const index = sectionIds.indexOf(entry.target.id);
-          if (index !== -1) {
-            setActiveSection(sections[index]);
+          const item = navItems.find(i => i.id === entry.target.id);
+          if (item) {
+            setActiveSection(item.label);
           } else if (window.scrollY < 100) {
             setActiveSection("HOME");
           }
@@ -71,9 +76,9 @@ export default function Navbar() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    sectionIds.forEach((id) => {
-      if (id) {
-        const element = document.getElementById(id);
+    navItems.forEach((item) => {
+      if (item.id) {
+        const element = document.getElementById(item.id);
         if (element) observer.observe(element);
       }
     });
@@ -92,11 +97,11 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "HOME", href: "/" },
-    { label: "ABOUT DR HASSANIN", href: "#about" },
-    { label: "VEIN CONDITIONS", href: "#conditions" },
-    { label: "TREATMENTS", href: "#treatments" },
-    { label: "FEES", href: "#fees" },
-    { label: "CONTACT", href: "#contact" },
+    { label: "ABOUT DR HASSANIN", href: "/#about" },
+    { label: "VEIN CONDITIONS", href: "/#conditions" },
+    { label: "TREATMENTS", href: "/#treatments" },
+    { label: "FEES", href: "/#fees" },
+    { label: "CONTACT", href: "/contact" },
   ];
 
   const handleLinkClick = (label: string) => {
