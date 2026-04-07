@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Reem_Kufi } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 const reemKufi = Reem_Kufi({
   subsets: ["latin", "arabic"],
@@ -15,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 import { Toaster } from "react-hot-toast";
+import { LayoutWrapper } from "@/components/layout/LayoutWrapper";
 
 export default function RootLayout({
   children,
@@ -27,10 +26,11 @@ export default function RootLayout({
         className={`${reemKufi.variable} antialiased font-sans`} // Added font-sans class
       >
         <Toaster position="top-center" reverseOrder={false} />
-        <Navbar />
-        {children}
-        <Footer />
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
       </body>
     </html>
   );
 }
+
