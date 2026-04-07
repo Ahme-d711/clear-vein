@@ -5,7 +5,7 @@ import { ShieldCheck } from "lucide-react";
 
 export default function GPReferrals() {
     return (
-        <section id="gp-referrals" className="bg-white py-10 lg:py-14 overflow-hidden">
+        <section id="gp-referrals" className="py-10 lg:py-14 overflow-hidden">
             <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-end">
                     

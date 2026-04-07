@@ -6,7 +6,7 @@ import DiagnosticsCard from "./DiagnosticsCard";
 
 export default function ReferralPortal() {
     return (
-        <section id="referral-portal" className="bg-[#F8FAFF] py-20 lg:py-24">
+        <section id="referral-portal" className="py-20 lg:py-24">
             <div className="container mx-auto px-6 max-w-7xl">
                 <Fade direction="up" triggerOnce cascade damping={0.2}>
                     <div className="space-y-12">

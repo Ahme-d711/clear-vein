@@ -23,7 +23,7 @@ export default function MainFooter() {
   ];
 
   return (
-    <footer className="bg-white border-t border-gray-100 pt-20 pb-12 overflow-hidden">
+    <footer className="bg-[#F8F9FF] border-t border-gray-100 pt-20 pb-12 overflow-hidden">
       <div className="container max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-10">
           {/* Brand Info */}
