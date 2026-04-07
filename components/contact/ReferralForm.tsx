@@ -3,6 +3,7 @@
 import { Lock, Upload, ArrowRight, X, FileText, Image as ImageIcon } from "lucide-react";
 import { Fade } from "react-awesome-reveal";
 import { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 interface FormFieldProps {
     label: string;
@@ -85,10 +86,18 @@ export default function ReferralForm() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        
+        // Simple Validation
+        if (!formData.gpName || !formData.medicalCouncilId) {
+            toast.error("Please fill in required fields.");
+            return;
+        }
+
         const submissionData = {
             ...formData,
             attachment: selectedFiles.length > 0 ? selectedFiles[0].file : null
         };
+        
         console.log("Form Submitted Successfully:", submissionData);
         
         // Clear Form Data
@@ -101,6 +110,8 @@ export default function ReferralForm() {
 
         // Clear Selected File & Revoke URL
         removeFile();
+
+        toast.success("Referral Submitted Successfully!");
     };
 
     return (

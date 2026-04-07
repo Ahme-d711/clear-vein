@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Doctor landing page built with Next.js",
 };
 
+import { Toaster } from "react-hot-toast";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} antialiased font-sans`} // Added font-sans class
       >
+        <Toaster position="top-center" reverseOrder={false} />
         <Navbar />
         {children}
         <Footer />
