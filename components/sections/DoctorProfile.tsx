@@ -5,7 +5,11 @@ import { Fade } from "react-awesome-reveal";
 import { Button } from '../ui/button';
 import { ArrowRight } from 'lucide-react';
 
-export default function DoctorProfile() {
+interface DoctorProfileProps {
+  profile: string;
+}
+
+export default function DoctorProfile({ profile }: DoctorProfileProps) {
     const qualifications = ["MD", "EBVS Cert (Hon)", "PhD", "MSc", "CSD"];
 
     return (
@@ -53,19 +57,11 @@ export default function DoctorProfile() {
                         </Fade>
                         {/* Body Text */}
                         <Fade direction="up" triggerOnce delay={400} duration={800}>
-                            <div className="space-y-6 text-base md:text-lg leading-relaxed font-light">
-                                <p>
-                                    Dr Hassanin is a highly specialized Consultant Vascular Surgeon with
-                                    international expertise in treating complex venous disorders. His clinical
-                                    practice is built on a foundation of academic excellence and surgical
-                                    innovation.
-                                </p>
-                                <p>
-                                    As an examiner for the Royal College of Surgeons in Ireland (RCSI), he
-                                    maintains the highest standards of medical practice and education.
-                                </p>
+                            <div className="space-y-6 text-base md:text-lg leading-relaxed font-light whitespace-pre-line">
+                                {profile}
                             </div>
                         </Fade>
+
                         <Fade direction="up" triggerOnce delay={400} duration={800}>
                             <Button variant="link" className="w-fit text-lg font-bold">Read Full Profile <ArrowRight className="w-5! h-5!"/></Button>
                         </Fade>

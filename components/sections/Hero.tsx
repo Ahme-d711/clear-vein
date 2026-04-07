@@ -5,7 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Fade } from "react-awesome-reveal";
 import { openWhatsApp } from "@/lib/whatsapp";
 
-export default function Hero() {
+interface HeroProps {
+  title: string;
+  subtitle: string;
+}
+
+export default function Hero({ title, subtitle }: HeroProps) {
     return (
         <section className="relative w-full min-h-[600px] lg:h-[93vh] flex items-center overflow-hidden pt-20">
             {/* Background Image with Overlay */}
@@ -34,10 +39,8 @@ export default function Hero() {
 
                     {/* Headline */}
                     <Fade direction="up" triggerOnce delay={100} duration={800}>
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight">
-                            Consultant-Led<br />
-                            Vein Care in<br />
-                            Dublin
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight whitespace-pre-line">
+                            {title}
                         </h1>
                     </Fade>
 
@@ -45,7 +48,7 @@ export default function Hero() {
                     <div className="space-y-4 max-w-2xl">
                         <Fade direction="up" triggerOnce delay={200} duration={800}>
                             <h2 className="text-xl md:text-2xl font-semibold text-[#86A0CD]">
-                                Clear Vein Clinic – Founded by Dr Ahmed Hassanin
+                                {subtitle}
                             </h2>
                         </Fade>
                         <Fade direction="up" triggerOnce delay={300} duration={800}>

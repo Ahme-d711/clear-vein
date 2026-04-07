@@ -5,17 +5,28 @@ import ConditionsWeTreat from "@/components/sections/ConditionsWeTreat";
 import AdvancedTreatments from "@/components/sections/AdvancedTreatments";
 import ClearVeinAdvantage from "@/components/sections/ClearVeinAdvantage";
 import CTASection from "@/components/sections/CTASection";
+import { ContentService } from "@/services/content.service";
 
-export default function Home() {
+export default async function Home() {
+  const content = await ContentService.getContent();
+
+  // If no content found (highly unlikely given service initialization),
+  // but a safe fallback is good for robust production apps
+  if (!content) return null;
+
   return (
     <main>
-      <Hero />
-      <ServicesOverview />
-      <DoctorProfile />
+      <Hero
+        title={content.heroTitle}
+        subtitle={content.heroSubtitle}
+      />
+      <ServicesOverview services={content.services} />
+      <DoctorProfile profile={content.doctorProfile} />
       <ConditionsWeTreat />
       <AdvancedTreatments />
       <ClearVeinAdvantage />
-      <CTASection />
+      <CTASection ctaText={content.ctaText} aboutText={content.aboutText} />
     </main>
   );
 }
+
