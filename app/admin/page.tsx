@@ -74,9 +74,10 @@ export default function UnifiedAdminPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-extrabold text-primary mb-2">General Content</h1>
-        <p className="text-[#64748B] text-lg font-light">Customize the main headlines and call-to-actions.</p>
+        <h1 className="text-3xl font-extrabold text-primary mb-2">Home Page Management</h1>
+        <p className="text-[#64748B] text-lg font-light">Manage all sections of your landing page from one central dashboard.</p>
       </div>
+
 
       <form onSubmit={handleSubmit} className="space-y-12">
         {/* HERO SECTION */}
