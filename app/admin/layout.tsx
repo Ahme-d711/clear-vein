@@ -40,6 +40,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
 
         <nav className="flex-1 p-4 py-8 space-y-2">
+          <div className="px-4 mb-4">
+            <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">Home Page Content</p>
+          </div>
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -60,6 +63,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             );
           })}
         </nav>
+
 
         <div className="p-4 border-t border-white/10">
           <Link 
