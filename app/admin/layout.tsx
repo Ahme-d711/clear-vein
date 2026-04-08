@@ -15,12 +15,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   const navItems = [
-    { label: 'General Content', href: '/admin', icon: FileText },
-    { label: 'Doctor Profile', href: '/admin/profile', icon: User },
-    { label: 'Clinical Services', href: '/admin/services', icon: ListChecks },
-    { label: 'Conditions We Treat', href: '/admin/conditions', icon: HeartPulse },
-    { label: 'Advanced Treatments', href: '/admin/treatments', icon: FileText }, // Lucide doesn't have good 'procedure' icon, using FileText or similar
-    { label: 'Clinic Advantages', href: '/admin/advantages', icon: ShieldCheck },
+    { label: 'Hero Section', href: '/admin#hero', icon: FileText },
+    { label: 'Services Overview', href: '/admin#services', icon: ListChecks },
+    { label: 'Doctor Profile', href: '/admin#profile', icon: User },
+    { label: 'Conditions We Treat', href: '/admin#conditions', icon: HeartPulse },
+    { label: 'Advanced Treatments', href: '/admin#treatments', icon: FileText },
+    { label: 'Clinic Advantages', href: '/admin#advantages', icon: ShieldCheck },
+    { label: 'Footer CTA', href: '/admin#cta', icon: ArrowLeft },
   ];
 
 

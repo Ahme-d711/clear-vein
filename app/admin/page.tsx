@@ -5,23 +5,37 @@ import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 import { AdminCard, FormField } from '@/components/admin/AdminCard';
 import { SaveAction } from '@/components/admin/SaveAction';
+import { ServicesManager } from '@/components/admin/ServicesManager';
+import { ListManager } from '@/components/admin/ListManager';
 
 interface ContentData {
+
   heroTitle: string;
   heroSubtitle: string;
   heroBadge: string;
   heroDescription: string;
   heroCtaPrimary: string;
   heroCtaSecondary: string;
-  aboutText: string;
   services: string[];
+  servicesTitle: string;
+  servicesDescription1: string;
+  servicesDescription2: string;
   doctorProfile: string;
+  conditionsTitle: string;
+  conditionsDescription: string;
+  conditionsList: { title: string; description: string }[];
+  treatmentsTitle: string;
+  treatmentsDescription: string;
+  treatmentsList: { title: string; description: string; label: string }[];
+  advantagesTitle: string;
+  advantagesList: { title: string; description: string }[];
+  aboutText: string;
   ctaText: string;
 }
 
-const inputStyles = "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all outline-none text-gray-800 bg-white";
+const inputStyles = "w-full px-4 py-3 rounded-xl border border-gray-100 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all outline-none text-gray-800 bg-white leading-relaxed";
 
-export default function GeneralContentPage() {
+export default function UnifiedAdminPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -36,6 +50,7 @@ export default function GeneralContentPage() {
   }, []);
 
   const update = (field: keyof ContentData, val: any) => setData(prev => ({ ...prev!, [field]: val }));
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,52 +78,165 @@ export default function GeneralContentPage() {
         <p className="text-[#64748B] text-lg font-light">Customize the main headlines and call-to-actions.</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <AdminCard title="Landing Page Hero Section">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FormField label="Hero Badge Text">
-              <input value={data.heroBadge} onChange={e => update('heroBadge', e.target.value)} className={inputStyles} required />
+      <form onSubmit={handleSubmit} className="space-y-12">
+        {/* HERO SECTION */}
+        <section id="hero">
+          <AdminCard title="1. Hero Section" iconColor="bg-blue-500">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="Badge Text">
+                <input value={data.heroBadge} onChange={e => update('heroBadge', e.target.value)} className={inputStyles} required />
+              </FormField>
+              <FormField label="Sub-Headline">
+                <input value={data.heroSubtitle} onChange={e => update('heroSubtitle', e.target.value)} className={inputStyles} required />
+              </FormField>
+            </div>
+            <FormField label="Main Title">
+              <textarea value={data.heroTitle} onChange={e => update('heroTitle', e.target.value)} rows={2} className={inputStyles} required />
             </FormField>
-            <FormField label="Hero Sub-Headline">
-              <input value={data.heroSubtitle} onChange={e => update('heroSubtitle', e.target.value)} className={inputStyles} required />
+            <FormField label="Description">
+              <textarea value={data.heroDescription} onChange={e => update('heroDescription', e.target.value)} rows={3} className={inputStyles} required />
             </FormField>
-          </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="Primary CTA">
+                <input value={data.heroCtaPrimary} onChange={e => update('heroCtaPrimary', e.target.value)} className={inputStyles} required />
+              </FormField>
+              <FormField label="Secondary CTA">
+                <input value={data.heroCtaSecondary} onChange={e => update('heroCtaSecondary', e.target.value)} className={inputStyles} required />
+              </FormField>
+            </div>
+          </AdminCard>
+        </section>
 
-          <FormField label="Hero Main Title">
-            <textarea value={data.heroTitle} onChange={e => update('heroTitle', e.target.value)} rows={3} className={inputStyles} required />
-          </FormField>
-
-          <FormField label="Hero Description Paragraph">
-            <textarea value={data.heroDescription} onChange={e => update('heroDescription', e.target.value)} rows={3} className={inputStyles} required />
-          </FormField>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FormField label="Primary CTA Label">
-              <input value={data.heroCtaPrimary} onChange={e => update('heroCtaPrimary', e.target.value)} className={inputStyles} required />
+        {/* SERVICES OVERVIEW */}
+        <section id="services">
+          <AdminCard title="2. Services Overview" iconColor="bg-cyan-500">
+            <FormField label="Overview Headline">
+              <textarea value={data.servicesTitle} onChange={e => update('servicesTitle', e.target.value)} rows={2} className={inputStyles} required />
             </FormField>
-            <FormField label="Secondary CTA Label">
-              <input value={data.heroCtaSecondary} onChange={e => update('heroCtaSecondary', e.target.value)} className={inputStyles} required />
+            <div className="grid grid-cols-1 gap-6">
+              <FormField label="Primary Description Card">
+                <textarea value={data.servicesDescription1} onChange={e => update('servicesDescription1', e.target.value)} rows={3} className={inputStyles} required />
+              </FormField>
+              <FormField label="Secondary Detail Paragraph">
+                <textarea value={data.servicesDescription2} onChange={e => update('servicesDescription2', e.target.value)} rows={3} className={inputStyles} required />
+              </FormField>
+            </div>
+            <ServicesManager 
+              services={data.services} 
+              onAdd={() => update('services', [...data.services, ''])}
+              onRemove={idx => update('services', data.services.filter((_, i) => i !== idx))}
+              onChange={(idx, val) => {
+                const s = [...data.services]; s[idx] = val; update('services', s);
+              }}
+            />
+          </AdminCard>
+        </section>
+
+        {/* DOCTOR PROFILE */}
+        <section id="profile">
+          <AdminCard title="3. Physician Profile" iconColor="bg-indigo-500">
+            <FormField label="Professional Bio" hint="Use double line breaks for paragraphs.">
+              <textarea value={data.doctorProfile} onChange={e => update('doctorProfile', e.target.value)} rows={10} className={inputStyles} required />
             </FormField>
-          </div>
+          </AdminCard>
+        </section>
 
-        </AdminCard>
 
 
-        <AdminCard title="Global Footer Call-To-Action" iconColor="bg-amber-500">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FormField label="Footer CTA Headline">
-              <input value={data.ctaText} onChange={e => update('ctaText', e.target.value)} className={inputStyles} required />
+        {/* CONDITIONS WE TREAT */}
+        <section id="conditions">
+          <AdminCard title="4. Conditions We Treat" iconColor="bg-emerald-500">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="Headline">
+                <input value={data.conditionsTitle} onChange={e => update('conditionsTitle', e.target.value)} className={inputStyles} required />
+              </FormField>
+              <FormField label="Description">
+                <input value={data.conditionsDescription} onChange={e => update('conditionsDescription', e.target.value)} className={inputStyles} required />
+              </FormField>
+            </div>
+            <ListManager 
+              title="Individual Conditions"
+              items={data.conditionsList || []}
+              fields={[
+                { key: 'title', label: 'Condition Name' },
+                { key: 'description', label: 'Summary', type: 'textarea' }
+              ]}
+              onAdd={() => update('conditionsList', [...(data.conditionsList || []), { title: '', description: '' }])}
+              onRemove={idx => update('conditionsList', data.conditionsList.filter((_, i) => i !== idx))}
+              onChange={(idx, key, val) => {
+                const list = [...data.conditionsList]; (list[idx] as any)[key] = val; update('conditionsList', list);
+              }}
+            />
+          </AdminCard>
+        </section>
+
+        {/* ADVANCED TREATMENTS */}
+        <section id="treatments">
+          <AdminCard title="5. Advanced Treatments" iconColor="bg-purple-500">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="Headline">
+                <input value={data.treatmentsTitle} onChange={e => update('treatmentsTitle', e.target.value)} className={inputStyles} required />
+              </FormField>
+              <FormField label="Description">
+                <input value={data.treatmentsDescription} onChange={e => update('treatmentsDescription', e.target.value)} className={inputStyles} required />
+              </FormField>
+            </div>
+            <ListManager 
+              title="Technology & Procedures"
+              items={data.treatmentsList || []}
+              fields={[
+                { key: 'title', label: 'Abbreviation (e.g. RFA)' },
+                { key: 'label', label: 'Tag (e.g. GOLD STANDARD)' },
+                { key: 'description', label: 'How it works', type: 'textarea' }
+              ]}
+              onAdd={() => update('treatmentsList', [...(data.treatmentsList || []), { title: '', description: '', label: '' }])}
+              onRemove={idx => update('treatmentsList', data.treatmentsList.filter((_, i) => i !== idx))}
+              onChange={(idx, key, val) => {
+                const list = [...data.treatmentsList]; (list[idx] as any)[key] = val; update('treatmentsList', list);
+              }}
+            />
+          </AdminCard>
+        </section>
+
+        {/* CLINIC ADVANTAGES */}
+        <section id="advantages">
+          <AdminCard title="6. Clinic Advantages" iconColor="bg-blue-600">
+            <FormField label="Section Headline">
+              <input value={data.advantagesTitle} onChange={e => update('advantagesTitle', e.target.value)} className={inputStyles} required />
             </FormField>
-            <FormField label="Footer CTA Description">
-              <input value={data.aboutText} onChange={e => update('aboutText', e.target.value)} className={inputStyles} required />
-            </FormField>
-          </div>
-        </AdminCard>
+            <ListManager 
+              title="Unique Selling Points"
+              items={data.advantagesList || []}
+              fields={[
+                { key: 'title', label: 'Advantage Title' },
+                { key: 'description', label: 'Details', type: 'textarea' }
+              ]}
+              onAdd={() => update('advantagesList', [...(data.advantagesList || []), { title: '', description: '' }])}
+              onRemove={idx => update('advantagesList', data.advantagesList.filter((_, i) => i !== idx))}
+              onChange={(idx, key, val) => {
+                const list = [...data.advantagesList]; (list[idx] as any)[key] = val; update('advantagesList', list);
+              }}
+            />
+          </AdminCard>
+        </section>
 
-
+        {/* GLOBAL CTA / FOOTER */}
+        <section id="cta">
+          <AdminCard title="7. Global Footer CTA" iconColor="bg-amber-500">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormField label="CTA Headline">
+                <input value={data.ctaText} onChange={e => update('ctaText', e.target.value)} className={inputStyles} required />
+              </FormField>
+              <FormField label="Detailed Instruction">
+                <input value={data.aboutText} onChange={e => update('aboutText', e.target.value)} className={inputStyles} required />
+              </FormField>
+            </div>
+          </AdminCard>
+        </section>
 
         <SaveAction saving={saving} success={success} />
       </form>
+
     </div>
   );
 }
