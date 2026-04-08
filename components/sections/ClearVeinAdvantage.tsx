@@ -4,30 +4,12 @@ import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 import { CheckCircle2 } from "lucide-react";
 
-const advantages = [
-    {
-        title: "Consultant-delivered Care",
-        description: "Your entire journey, from first scan to final treatment, is personally managed by Dr Hassanin.",
-    },
-    {
-        title: "Duplex Ultrasound Included",
-        description: "Gold-standard diagnostic imaging performed at the initial consultation for precise planning.",
-    },
-    {
-        title: "Evidence-based Guidelines",
-        description: "We strictly adhere to NICE and international vascular guidelines for patient safety and efficacy.",
-    },
-    {
-        title: "Day-case Procedures",
-        description: "Walk-in, walk-out treatments performed under local anaesthetic with no hospital stay required.",
-    },
-    {
-        title: "Complex Case Expertise",
-        description: "Equipped to manage complex recurrent disease and advanced venous ulceration.",
-    },
-];
+interface ClearVeinAdvantageProps {
+  title: string;
+  advantages: { title: string; description: string }[];
+}
 
-export default function ClearVeinAdvantage() {
+export default function ClearVeinAdvantage({ title, advantages = [] }: ClearVeinAdvantageProps) {
     return (
         <section id="advantage" className="bg-[#F8F9FF] py-24 lg:py-32 overflow-hidden">
             <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
@@ -37,9 +19,10 @@ export default function ClearVeinAdvantage() {
                     <div className="space-y-16">
                         <Fade direction="up" triggerOnce duration={800}>
                             <h2 className="text-2xl md:text-4xl font-extrabold text-primary leading-tight">
-                                The Clear Vein Advantage
+                                {title}
                             </h2>
                         </Fade>
+
 
                         <div className="relative space-y-12">
                             {/* Vertical Line */}

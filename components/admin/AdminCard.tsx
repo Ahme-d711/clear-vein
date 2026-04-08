@@ -2,15 +2,20 @@ interface AdminCardProps {
   title: string;
   iconColor?: string;
   children: React.ReactNode;
+  action?: React.ReactNode;
 }
 
-export function AdminCard({ title, iconColor = "bg-blue-500", children }: AdminCardProps) {
+export function AdminCard({ title, iconColor = "bg-blue-500", children, action }: AdminCardProps) {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="px-6 py-4 bg-gray-50 border-b border-gray-100 flex items-center gap-2">
-        <span className={`w-2 h-2 ${iconColor} rounded-full`} />
-        <h3 className="font-semibold text-gray-800">{title}</h3>
+      <div className="px-6 py-4 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className={`w-2 h-2 ${iconColor} rounded-full`} />
+          <h3 className="font-semibold text-gray-800">{title}</h3>
+        </div>
+        {action}
       </div>
+
       <div className="p-8 space-y-6">
         {children}
       </div>

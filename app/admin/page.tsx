@@ -9,6 +9,10 @@ import { SaveAction } from '@/components/admin/SaveAction';
 interface ContentData {
   heroTitle: string;
   heroSubtitle: string;
+  heroBadge: string;
+  heroDescription: string;
+  heroCtaPrimary: string;
+  heroCtaSecondary: string;
   aboutText: string;
   services: string[];
   doctorProfile: string;
@@ -61,23 +65,47 @@ export default function GeneralContentPage() {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         <AdminCard title="Landing Page Hero Section">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <FormField label="Hero Badge Text">
+              <input value={data.heroBadge} onChange={e => update('heroBadge', e.target.value)} className={inputStyles} required />
+            </FormField>
+            <FormField label="Hero Sub-Headline">
+              <input value={data.heroSubtitle} onChange={e => update('heroSubtitle', e.target.value)} className={inputStyles} required />
+            </FormField>
+          </div>
+
           <FormField label="Hero Main Title">
             <textarea value={data.heroTitle} onChange={e => update('heroTitle', e.target.value)} rows={3} className={inputStyles} required />
           </FormField>
-          
-          <FormField label="Hero Sub-Headline">
-            <input value={data.heroSubtitle} onChange={e => update('heroSubtitle', e.target.value)} className={inputStyles} required />
+
+          <FormField label="Hero Description Paragraph">
+            <textarea value={data.heroDescription} onChange={e => update('heroDescription', e.target.value)} rows={3} className={inputStyles} required />
           </FormField>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <FormField label="CTA Button Text">
+            <FormField label="Primary CTA Label">
+              <input value={data.heroCtaPrimary} onChange={e => update('heroCtaPrimary', e.target.value)} className={inputStyles} required />
+            </FormField>
+            <FormField label="Secondary CTA Label">
+              <input value={data.heroCtaSecondary} onChange={e => update('heroCtaSecondary', e.target.value)} className={inputStyles} required />
+            </FormField>
+          </div>
+
+        </AdminCard>
+
+
+        <AdminCard title="Global Footer Call-To-Action" iconColor="bg-amber-500">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <FormField label="Footer CTA Headline">
               <input value={data.ctaText} onChange={e => update('ctaText', e.target.value)} className={inputStyles} required />
             </FormField>
-            <FormField label="Secondary About (Sub-CTA)">
+            <FormField label="Footer CTA Description">
               <input value={data.aboutText} onChange={e => update('aboutText', e.target.value)} className={inputStyles} required />
             </FormField>
           </div>
         </AdminCard>
+
+
 
         <SaveAction saving={saving} success={success} />
       </form>

@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, User, ListChecks, ArrowLeft, HeartPulse } from 'lucide-react';
+import { LayoutDashboard, FileText, User, ListChecks, ArrowLeft, HeartPulse, ShieldCheck } from 'lucide-react';
+
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -16,8 +17,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const navItems = [
     { label: 'General Content', href: '/admin', icon: FileText },
     { label: 'Doctor Profile', href: '/admin/profile', icon: User },
-    { label: 'Services List', href: '/admin/services', icon: ListChecks },
+    { label: 'Clinical Services', href: '/admin/services', icon: ListChecks },
+    { label: 'Conditions We Treat', href: '/admin/conditions', icon: HeartPulse },
+    { label: 'Advanced Treatments', href: '/admin/treatments', icon: FileText }, // Lucide doesn't have good 'procedure' icon, using FileText or similar
+    { label: 'Clinic Advantages', href: '/admin/advantages', icon: ShieldCheck },
   ];
+
 
   return (
     <div className="flex min-h-screen bg-[#F8FAFF]">

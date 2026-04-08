@@ -8,9 +8,13 @@ import { openWhatsApp } from "@/lib/whatsapp";
 interface HeroProps {
   title: string;
   subtitle: string;
+  badge: string;
+  description: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
 }
 
-export default function Hero({ title, subtitle }: HeroProps) {
+export default function Hero({ title, subtitle, badge, description, ctaPrimary, ctaSecondary }: HeroProps) {
     return (
         <section className="relative w-full min-h-[600px] lg:h-[93vh] flex items-center overflow-hidden pt-20">
             {/* Background Image with Overlay */}
@@ -32,7 +36,7 @@ export default function Hero({ title, subtitle }: HeroProps) {
                     <Fade direction="up" triggerOnce duration={800}>
                         <div className="inline-block">
                             <span className="px-3 py-1 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-[#ADC7F7] backdrop-blur-md border border-[#ADC7F74D] rounded-md uppercase">
-                                Specialist Vascular Clinic
+                                {badge}
                             </span>
                         </div>
                     </Fade>
@@ -52,9 +56,8 @@ export default function Hero({ title, subtitle }: HeroProps) {
                             </h2>
                         </Fade>
                         <Fade direction="up" triggerOnce delay={300} duration={800}>
-                            <p className="text-base md:text-lg text-white/80 leading-relaxed font-light">
-                                Specialist assessment and minimally invasive treatment delivered by a 
-                                Consultant Vascular Surgeon in a state-of-the-art clinical setting.
+                            <p className="text-base md:text-lg text-white/80 leading-relaxed font-light whitespace-pre-line">
+                                {description}
                             </p>
                         </Fade>
                     </div>
@@ -67,13 +70,13 @@ export default function Hero({ title, subtitle }: HeroProps) {
                                 variant="outline"
                                 size="xl"
                             >
-                                Book Consultation
+                                {ctaPrimary}
                             </Button>
                             <Button
                                 variant="ghost"
                                 size="xl"
                             >
-                                Learn More
+                                {ctaSecondary}
                             </Button>
                         </div>
                     </Fade>
@@ -82,4 +85,5 @@ export default function Hero({ title, subtitle }: HeroProps) {
         </section>
     );
 }
+
 

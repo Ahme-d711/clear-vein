@@ -19,14 +19,37 @@ export default async function Home() {
       <Hero
         title={content.heroTitle}
         subtitle={content.heroSubtitle}
+        badge={content.heroBadge}
+        description={content.heroDescription}
+        ctaPrimary={content.heroCtaPrimary}
+        ctaSecondary={content.heroCtaSecondary}
       />
-      <ServicesOverview services={content.services} />
+
+      <ServicesOverview 
+        services={content.services} 
+        title={content.servicesTitle}
+        description1={content.servicesDescription1}
+        description2={content.servicesDescription2}
+      />
+
       <DoctorProfile profile={content.doctorProfile} />
-      <ConditionsWeTreat />
-      <AdvancedTreatments />
-      <ClearVeinAdvantage />
+      <ConditionsWeTreat 
+        title={content.conditionsTitle} 
+        description={content.conditionsDescription} 
+        conditions={content.conditionsList} 
+      />
+      <AdvancedTreatments 
+        title={content.treatmentsTitle} 
+        description={content.treatmentsDescription} 
+        treatments={content.treatmentsList} 
+      />
+      <ClearVeinAdvantage 
+        title={content.advantagesTitle} 
+        advantages={content.advantagesList} 
+      />
       <CTASection ctaText={content.ctaText} aboutText={content.aboutText} />
     </main>
+
   );
 }
 

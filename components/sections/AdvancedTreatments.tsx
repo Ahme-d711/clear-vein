@@ -2,25 +2,13 @@
 
 import { Fade } from "react-awesome-reveal";
 
-const treatments = [
-    {
-        title: "RFA",
-        description: "Radiofrequency Ablation uses thermal energy to collapse and seal the vein wall permanently.",
-        label: "GOLD STANDARD CHOICE",
-    },
-    {
-        title: "EVLT",
-        description: "Endovenous Laser Treatment uses precision light energy to target incompetent veins.",
-        label: "CLINICAL PRECISION",
-    },
-    {
-        title: "Foam Sclerotherapy",
-        description: "Chemical ablation using physician-compounded foam for targeted vein closure.",
-        label: "MINIMALLY INVASIVE",
-    },
-];
+interface AdvancedTreatmentsProps {
+  title: string;
+  description: string;
+  treatments?: { title: string; description: string; label: string }[];
+}
 
-export default function AdvancedTreatments() {
+export default function AdvancedTreatments({ title, description, treatments = [] }: AdvancedTreatmentsProps) {
     return (
         <section className="bg-[#006A9B] py-24 lg:py-32 text-white overflow-hidden">
             <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
@@ -29,15 +17,15 @@ export default function AdvancedTreatments() {
                     <div className="max-w-2xl space-y-4">
                         <Fade direction="up" triggerOnce duration={800}>
                             <h2 className="text-2xl md:text-4xl font-bold leading-tight">
-                                Advanced Minimally Invasive Treatments
+                                {title}
                             </h2>
                             <p className="text-lg text-white/80 font-light max-w-xl">
-                                We utilize state-of-the-art technologies to ensure effective closure of 
-                                diseased veins with minimal patient discomfort.
+                                {description}
                             </p>
                         </Fade>
                     </div>
                 </div>
+
 
                 {/* Treatment Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-0 relative">
