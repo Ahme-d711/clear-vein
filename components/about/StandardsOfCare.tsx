@@ -1,6 +1,12 @@
 import { Fade } from "react-awesome-reveal";
 
-const PILLARS = [
+interface StandardsOfCareProps {
+    title?: string;
+    subtitle?: string;
+    pillars?: { title: string; description: string; side: 'left' | 'right' }[];
+}
+
+const defaultPillars: StandardsOfCareProps['pillars'] = [
     {
         title: "Consultant-Led",
         description: "Every stage of your journey, from initial scan to post-operative follow-up, is personally managed by Dr. Hassanin.",
@@ -23,7 +29,13 @@ const PILLARS = [
     }
 ];
 
-export default function StandardsOfCare() {
+
+export default function StandardsOfCare({ 
+    title = "The Standards of Care", 
+    subtitle = "Four pillars that define Dr. Hassanin's surgical practice.", 
+    pillars = defaultPillars 
+}: StandardsOfCareProps) {
+
     return (
         <section className="py-24 min-h-screen bg-primary relative overflow-hidden">
             {/* Background Decorative Element */}
@@ -35,9 +47,9 @@ export default function StandardsOfCare() {
                 {/* Header */}
                 <div className="text-center mb-16">
                     <Fade direction="up" triggerOnce>
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">The Standards of Care</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{title}</h2>
                         <p className="text-lg text-[#8BA3C7] font-medium">
-                            Four pillars that define Dr. Hassanin's surgical practice.
+                            {subtitle}
                         </p>
                     </Fade>
                 </div>
@@ -48,7 +60,8 @@ export default function StandardsOfCare() {
                     <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/20 -translate-x-1/2 hidden lg:block" />
 
                     <div className="space-y-14">
-                        {PILLARS.map((pillar, idx) => (
+                        {pillars?.map((pillar, idx) => (
+
                             <div key={idx} className="relative py-2">
                                 {/* Desktop Layout */}
                                 <div className="hidden lg:flex items-center justify-center">

@@ -58,8 +58,88 @@ const DEFAULTS = {
     { label: "Medical Disclaimer", href: "#" },
     { label: "GP Referrals", href: "#" },
     { label: "FAQs", href: "#" }
+  ],
+  aboutBadge: 'Consultant Vascular Surgeon',
+  aboutSuffix: 'PhD FEBVS MSc',
+  aboutBio1: 'Currently practising as a Consultant Vascular Surgeon within the HSE in Dublin.',
+  aboutBio2: 'Pioneering minimally invasive vascular care through academic rigor, clinical excellence, and patient-centered surgical precision.',
+  aboutQualifications: [
+    "PhD Vascular Surgery",
+    "FEBVS Fellow",
+    "MSc Vascular & General Surgery"
+  ],
+  aboutAppointments: [
+    "HSE Consultant Surgeon",
+    "RCSI Clinical Examiner"
+  ],
+  aboutAcademicBackground: "Dr. Hassanin holds a prestigious PhD in Vascular Surgery and two Master's degrees (MSc) in both Vascular and General Surgery. As a Fellow of the European Board of Vascular Surgery (FEBVS) and a Level 9 Diploma holder in Healthcare Leadership and Management from UCC, he merges clinical expertise with structural excellence.",
+  aboutAcademicTags: [
+    "PhD Vascular Surgery",
+    "MSc Vascular Surgery",
+    "MSc General Surgery",
+    "FEBVS Fellow",
+    "L9 Healthcare Leadership & Management"
+  ],
+  aboutPublicationCount: "30+",
+  aboutPublicationCountLabel: "Contributor to over 30 peer-reviewed medical publications in international vascular journals.",
+  aboutCredentialsList: [
+    {
+      title: "FEBVS Certification",
+      description: "Fellow of the European Board of Vascular Surgery, signifying the highest standard of specialist training and excellence across the continent."
+    },
+    {
+      title: "RCSI Examiner",
+      description: "Serving as an official Clinical Examiner for the Royal College of Surgeons in Ireland, shaping the next generation of surgeons."
+    },
+    {
+      title: "UCC Leadership & Management",
+      description: "Level 9 Diploma in Healthcare Leadership and Management (UCC), applying systemic innovation to clinical practice and patient pathways."
+    }
+  ],
+  aboutProfessionalTitle: 'Professional Profile',
+  aboutProfessionalSubtitle: '& Academic Excellence',
+  aboutProfessionalParagraphs: [
+    "Dr. Ahmed Hassanin is a distinguished Consultant Vascular Surgeon whose career is defined by a commitment to clinical innovation and academic excellence. Currently practising within the HSE in Dublin, he provides specialist care across the full spectrum of arterial and venous pathologies.",
+    "His doctoral research (PhD) and multiple international publications in varicose veins management—referenced in the most recent ESVS Guidelines—are complemented by two Master's degrees in Vascular and General Surgery. This academic foundation ensures that patients at Clear Vein Clinic benefit from the most advanced, research-backed treatments available in modern medicine."
+  ],
+  aboutClinicalFocus: [
+    "Minimally Invasive Vein Surgery",
+    "Advanced Endovascular Techniques",
+    "Complex Wound Management",
+    "Carotid & Peripheral Arterial Surgery"
+  ],
+  aboutResearchTeaching: [
+    "30+ Peer-Reviewed Articles",
+    "RCSI Surgical Education",
+    "International Guest Lecturer",
+    "Clinical Audit Leadership"
+  ],
+  aboutStandardsTitle: 'The Standards of Care',
+  aboutStandardsSubtitle: "Four pillars that define Dr. Hassanin's surgical practice.",
+  aboutPillars: [
+    {
+      title: "Consultant-Led",
+      description: "Every stage of your journey, from initial scan to post-operative follow-up, is personally managed by Dr. Hassanin.",
+      side: "left"
+    },
+    {
+      title: "Evidence-Based",
+      description: "Utilizing the latest clinical trials and international vascular registries to ensure the highest safety profiles.",
+      side: "right"
+    },
+    {
+      title: "Patient-Centered",
+      description: "Bespoke treatment plans tailored to individual lifestyle needs and clinical requirements.",
+      side: "left"
+    },
+    {
+      title: "Surgical Precision",
+      description: "Employing cutting-edge endovenous laser and radiofrequency technology for superior cosmetic and functional results.",
+      side: "right"
+    }
   ]
 };
+
 
 
 export class ContentService {

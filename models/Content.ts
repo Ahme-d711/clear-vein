@@ -30,11 +30,30 @@ export interface IContent extends Document {
   footerDescription: string;
   footerCopyright: string;
   footerLinks: { label: string; href: string }[];
+
+  // New About Page Fields
+  aboutBadge: string;
+  aboutSuffix: string;
+  aboutBio1: string;
+  aboutBio2: string;
+  aboutQualifications: string[];
+  aboutAppointments: string[];
+  aboutAcademicBackground: string;
+  aboutAcademicTags: string[];
+  aboutPublicationCount: string;
+  aboutPublicationCountLabel: string;
+  aboutCredentialsList: { title: string; description: string }[];
+  aboutProfessionalTitle: string;
+  aboutProfessionalSubtitle: string;
+  aboutProfessionalParagraphs: string[];
+  aboutClinicalFocus: string[];
+  aboutResearchTeaching: string[];
+  aboutStandardsTitle: string;
+  aboutStandardsSubtitle: string;
+  aboutPillars: { title: string; description: string; side: 'left' | 'right' }[];
   
   updatedAt: Date;
 }
-
-
 
 const ContentSchema: Schema = new Schema(
   {
@@ -88,7 +107,36 @@ const ContentSchema: Schema = new Schema(
     footerLinks: [{
       label: String,
       href: String
+    }],
+
+    // About Page Fields
+    aboutBadge: { type: String, default: 'Consultant Vascular Surgeon' },
+    aboutSuffix: { type: String, default: 'PhD FEBVS MSc' },
+    aboutBio1: { type: String, default: 'Currently practising as a Consultant Vascular Surgeon within the HSE in Dublin.' },
+    aboutBio2: { type: String, default: 'Pioneering minimally invasive vascular care through academic rigor, clinical excellence, and patient-centered surgical precision.' },
+    aboutQualifications: { type: [String], default: [] },
+    aboutAppointments: { type: [String], default: [] },
+    aboutAcademicBackground: { type: String, default: '' },
+    aboutAcademicTags: { type: [String], default: [] },
+    aboutPublicationCount: { type: String, default: '30+' },
+    aboutPublicationCountLabel: { type: String, default: 'Contributor to over 30 peer-reviewed medical publications.' },
+    aboutCredentialsList: [{
+      title: String,
+      description: String
+    }],
+    aboutProfessionalTitle: { type: String, default: 'Professional Profile' },
+    aboutProfessionalSubtitle: { type: String, default: '& Academic Excellence' },
+    aboutProfessionalParagraphs: { type: [String], default: [] },
+    aboutClinicalFocus: { type: [String], default: [] },
+    aboutResearchTeaching: { type: [String], default: [] },
+    aboutStandardsTitle: { type: String, default: 'The Standards of Care' },
+    aboutStandardsSubtitle: { type: String, default: "Four pillars that define Dr. Hassanin's surgical practice." },
+    aboutPillars: [{
+      title: String,
+      description: String,
+      side: { type: String, enum: ['left', 'right'] }
     }]
+
   },
   { timestamps: true }
 );

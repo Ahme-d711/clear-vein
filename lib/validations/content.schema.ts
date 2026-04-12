@@ -43,7 +43,36 @@ export const ContentUpdateSchema = z.object({
   })).optional(),
   aboutText: z.string().optional(),
   ctaText: z.string().optional(),
+
+  // About Page Fields
+  aboutBadge: z.string().optional(),
+  aboutSuffix: z.string().optional(),
+  aboutBio1: z.string().optional(),
+  aboutBio2: z.string().optional(),
+  aboutQualifications: z.array(z.string()).optional(),
+  aboutAppointments: z.array(z.string()).optional(),
+  aboutAcademicBackground: z.string().optional(),
+  aboutAcademicTags: z.array(z.string()).optional(),
+  aboutPublicationCount: z.string().optional(),
+  aboutPublicationCountLabel: z.string().optional(),
+  aboutCredentialsList: z.array(z.object({
+    title: z.string(),
+    description: z.string()
+  })).optional(),
+  aboutProfessionalTitle: z.string().optional(),
+  aboutProfessionalSubtitle: z.string().optional(),
+  aboutProfessionalParagraphs: z.array(z.string()).optional(),
+  aboutClinicalFocus: z.array(z.string()).optional(),
+  aboutResearchTeaching: z.array(z.string()).optional(),
+  aboutStandardsTitle: z.string().optional(),
+  aboutStandardsSubtitle: z.string().optional(),
+  aboutPillars: z.array(z.object({
+    title: z.string(),
+    description: z.string(),
+    side: z.enum(['left', 'right'])
+  })).optional(),
 });
+
 
 
 

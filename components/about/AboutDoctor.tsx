@@ -1,18 +1,35 @@
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 
-const QUALIFICATIONS = [
+const defaultQuals = [
     "PhD Vascular Surgery",
     "FEBVS Fellow",
     "MSc Vascular & General Surgery"
 ];
 
-const APPOINTMENTS = [
+const defaultApps = [
     "HSE Consultant Surgeon",
     "RCSI Clinical Examiner"
 ];
 
-export default function AboutDoctor() {
+interface AboutDoctorProps {
+    badge?: string;
+    suffix?: string;
+    bio1?: string;
+    bio2?: string;
+    qualifications?: string[];
+    appointments?: string[];
+}
+
+export default function AboutDoctor({
+    badge = "Consultant Vascular Surgeon",
+    suffix = "PhD FEBVS MSc",
+    bio1 = "Currently practising as a Consultant Vascular Surgeon within the HSE in Dublin.",
+    bio2 = "Pioneering minimally invasive vascular care through academic rigor, clinical excellence, and patient-centered surgical precision.",
+    qualifications = defaultQuals,
+    appointments = defaultApps
+}: AboutDoctorProps) {
+
     return (
         <section className="py-24 min-h-[93vh] overflow-hidden place-content-center bg-[#F8F9FF] ">
             <div className="container mx-auto px-6 max-w-6xl">
@@ -44,7 +61,7 @@ export default function AboutDoctor() {
                             {/* Badge & Name Header */}
                             <div className="space-y-6">
                                 <span className="inline-block px-4 py-1.5 bg-[#002B4D] text-[#86A0CD] text-[10px] font-bold tracking-[0.2em] rounded-md uppercase">
-                                    Consultant Vascular Surgeon
+                                    {badge}
                                 </span>
                                 
                                 <div className="space-y-2">
@@ -52,7 +69,7 @@ export default function AboutDoctor() {
                                         Dr Ahmed<br />Hassanin
                                     </h1>
                                     <p className="text-5xl text-[#505F76] tracking-tight">
-                                        PhD FEBVS MSc
+                                        {suffix}
                                     </p>
                                 </div>
                             </div>
@@ -60,11 +77,10 @@ export default function AboutDoctor() {
                             {/* Bio Paragraphs */}
                             <div className="space-y-3 text-lg text-[#505F76CC] leading-relaxed max-w-xl">
                                 <p className="font-medium text-[#505F76]">
-                                    Currently practising as a Consultant Vascular Surgeon within the HSE in Dublin.
+                                    {bio1}
                                 </p>
                                 <p>
-                                    Pioneering minimally invasive vascular care through academic rigor, 
-                                    clinical excellence, and patient-centered surgical precision.
+                                    {bio2}
                                 </p>
                             </div>
 
@@ -79,7 +95,7 @@ export default function AboutDoctor() {
                                         Qualifications
                                     </h4>
                                     <ul className="space-y-3">
-                                        {QUALIFICATIONS.map((item, i) => (
+                                        {qualifications?.map((item, i) => (
                                             <li key={i} className="flex items-center gap-3">
                                                 <span className="text-xs text-primary">{item}</span>
                                             </li>
@@ -93,7 +109,7 @@ export default function AboutDoctor() {
                                         Appointments
                                     </h4>
                                     <ul className="space-y-3">
-                                        {APPOINTMENTS.map((item, i) => (
+                                        {appointments?.map((item, i) => (
                                             <li key={i} className="flex items-center gap-3">
                                                 <span className="text-xs text-primary">{item}</span>
                                             </li>
