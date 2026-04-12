@@ -23,8 +23,17 @@ export interface IContent extends Document {
   treatmentsList: { title: string; description: string; label: string }[];
   advantagesTitle: string;
   advantagesList: { title: string; description: string }[];
+  
+  // Global Components
+  navLogoText: string;
+  navLinks: { label: string; href: string }[];
+  footerDescription: string;
+  footerCopyright: string;
+  footerLinks: { label: string; href: string }[];
+  
   updatedAt: Date;
 }
+
 
 
 const ContentSchema: Schema = new Schema(
@@ -66,10 +75,24 @@ const ContentSchema: Schema = new Schema(
     advantagesList: [{
       title: String,
       description: String
+    }],
+
+    // Global Components
+    navLogoText: { type: String, default: 'CLEAR VEIN' },
+    navLinks: [{
+      label: String,
+      href: String
+    }],
+    footerDescription: { type: String, default: 'Specialist venous care delivered with surgical precision. Led by Consultant Vascular Surgeon Dr Ahmed Hassanin.' },
+    footerCopyright: { type: String, default: '© 2024 Clear Vein Clinic. Mr. Ahmed Hassanin is registered on the Specialist Division of the Irish Medical Council (Vascular Surgery) and practises in accordance with professional standards and clinical guidelines.' },
+    footerLinks: [{
+      label: String,
+      href: String
     }]
   },
   { timestamps: true }
 );
+
 
 
 

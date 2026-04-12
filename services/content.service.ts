@@ -39,8 +39,28 @@ const DEFAULTS = {
     { title: "Evidence-based Guidelines", description: "We strictly adhere to NICE and international vascular guidelines for patient safety and efficacy." },
     { title: "Day-case Procedures", description: "Walk-in, walk-out treatments performed under local anaesthetic with no hospital stay required." },
     { title: "Complex Case Expertise", description: "Equipped to manage complex recurrent disease and advanced venous ulceration." }
+  ],
+  navLogoText: 'CLEAR VEIN',
+  navLinks: [
+    { label: "HOME", href: "/" },
+    { label: "ABOUT DR HASSANIN", href: "/about" },
+    { label: "VEIN CONDITIONS", href: "/#conditions" },
+    { label: "TREATMENTS", href: "/#treatments" },
+    { label: "FEES", href: "/#fees" },
+    { label: "CONTACT", href: "/contact" }
+  ],
+  footerDescription: 'Specialist venous care delivered with surgical precision. Led by Consultant Vascular Surgeon Dr Ahmed Hassanin.',
+  footerCopyright: '© 2024 Clear Vein Clinic. Mr. Ahmed Hassanin is registered on the Specialist Division of the Irish Medical Council (Vascular Surgery) and practises in accordance with professional standards and clinical guidelines.',
+  footerLinks: [
+    { label: "Privacy Policy", href: "#" },
+    { label: "Cookie Policy", href: "#" },
+    { label: "Terms & Conditions", href: "#" },
+    { label: "Medical Disclaimer", href: "#" },
+    { label: "GP Referrals", href: "#" },
+    { label: "FAQs", href: "#" }
   ]
 };
+
 
 export class ContentService {
   /**

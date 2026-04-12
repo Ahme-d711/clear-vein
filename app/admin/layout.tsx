@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, User, ListChecks, ArrowLeft, HeartPulse, ShieldCheck } from 'lucide-react';
+import { LayoutDashboard, FileText, User, ListChecks, ArrowLeft, HeartPulse, ShieldCheck, Globe } from 'lucide-react';
+
 
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -14,15 +15,21 @@ function cn(...inputs: ClassValue[]) {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  const navItems = [
+  const homeItems = [
     { label: 'Hero Section', href: '/admin#hero', icon: FileText },
     { label: 'Services Overview', href: '/admin#services', icon: ListChecks },
     { label: 'Doctor Profile', href: '/admin#profile', icon: User },
-    { label: 'Conditions We Treat', href: '/admin#conditions', icon: HeartPulse },
-    { label: 'Advanced Treatments', href: '/admin#treatments', icon: FileText },
+    { label: 'Conditions', href: '/admin#conditions', icon: HeartPulse },
+    { label: 'Treatments', href: '/admin#treatments', icon: FileText },
     { label: 'Clinic Advantages', href: '/admin#advantages', icon: ShieldCheck },
     { label: 'Footer CTA', href: '/admin#cta', icon: ArrowLeft },
   ];
+
+  const globalItems = [
+    { label: 'Global Branding', href: '/admin/global', icon: Globe },
+  ];
+
+
 
 
   return (
@@ -39,30 +46,62 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <p className="text-[#ADC7F7] text-[10px] uppercase tracking-[0.2em] font-bold">Clear Vein Clinic</p>
         </div>
 
-        <nav className="flex-1 p-4 py-8 space-y-2">
-          <div className="px-4 mb-4">
-            <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">Home Page Content</p>
+        <nav className="flex-1 p-4 py-8 space-y-6">
+          <div>
+            <div className="px-4 mb-4">
+              <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">Home Page Content</p>
+            </div>
+            <div className="space-y-1">
+              {homeItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
+                      isActive 
+                        ? "bg-primary text-white shadow-lg shadow-primary/20" 
+                        : "text-[#ADC7F7] hover:bg-white/5 hover:text-white"
+                    )}
+                  >
+                    <Icon className={cn("w-5 h-5", isActive ? "text-white" : "text-[#ADC7F7] group-hover:text-white")} />
+                    <span className="font-medium">{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
-                  isActive 
-                    ? "bg-primary text-white shadow-lg shadow-primary/20" 
-                    : "text-[#ADC7F7] hover:bg-white/5 hover:text-white"
-                )}
-              >
-                <Icon className={cn("w-5 h-5", isActive ? "text-white" : "text-[#ADC7F7] group-hover:text-white")} />
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            );
-          })}
+
+          <div>
+            <div className="px-4 mb-4">
+              <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">Site-Wide Elements</p>
+            </div>
+            <div className="space-y-1">
+              {globalItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group",
+                      isActive 
+                        ? "bg-primary text-white shadow-lg shadow-primary/20" 
+                        : "text-[#ADC7F7] hover:bg-white/5 hover:text-white"
+                    )}
+                  >
+                    <Icon className={cn("w-5 h-5", isActive ? "text-white" : "text-[#ADC7F7] group-hover:text-white")} />
+                    <span className="font-medium">{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
         </nav>
+
 
 
         <div className="p-4 border-t border-white/10">

@@ -9,7 +9,6 @@ import { ServicesManager } from '@/components/admin/ServicesManager';
 import { ListManager } from '@/components/admin/ListManager';
 
 interface ContentData {
-
   heroTitle: string;
   heroSubtitle: string;
   heroBadge: string;
@@ -29,6 +28,11 @@ interface ContentData {
   treatmentsList: { title: string; description: string; label: string }[];
   advantagesTitle: string;
   advantagesList: { title: string; description: string }[];
+  navLogoText: string;
+  navLinks: { label: string; href: string }[];
+  footerDescription: string;
+  footerCopyright: string;
+  footerLinks: { label: string; href: string }[];
   aboutText: string;
   ctaText: string;
 }
@@ -51,7 +55,6 @@ export default function UnifiedAdminPage() {
 
   const update = (field: keyof ContentData, val: any) => setData(prev => ({ ...prev!, [field]: val }));
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!data) return;
@@ -73,13 +76,23 @@ export default function UnifiedAdminPage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-extrabold text-primary mb-2">Home Page Management</h1>
-        <p className="text-[#64748B] text-lg font-light">Manage all sections of your landing page from one central dashboard.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-extrabold text-primary mb-2">Home Page Management</h1>
+          <p className="text-[#64748B] text-lg font-light">Manage all sections of your landing page from one central dashboard.</p>
+        </div>
       </div>
 
+      <form onSubmit={handleSubmit} className="space-y-16">
+        <div className="space-y-4">
+          <div className="flex items-center gap-4 px-2">
+            <span className="h-px flex-1 bg-gray-100" />
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Main Landing Sections</span>
+            <span className="h-px flex-1 bg-gray-100" />
+          </div>
+        </div>
 
-      <form onSubmit={handleSubmit} className="space-y-12">
+
         {/* HERO SECTION */}
         <section id="hero">
           <AdminCard title="1. Hero Section" iconColor="bg-blue-500">
@@ -125,8 +138,8 @@ export default function UnifiedAdminPage() {
             <ServicesManager 
               services={data.services} 
               onAdd={() => update('services', [...data.services, ''])}
-              onRemove={idx => update('services', data.services.filter((_, i) => i !== idx))}
-              onChange={(idx, val) => {
+              onRemove={(idx: number) => update('services', data.services.filter((_, i) => i !== idx))}
+              onChange={(idx: number, val: string) => {
                 const s = [...data.services]; s[idx] = val; update('services', s);
               }}
             />
@@ -141,8 +154,6 @@ export default function UnifiedAdminPage() {
             </FormField>
           </AdminCard>
         </section>
-
-
 
         {/* CONDITIONS WE TREAT */}
         <section id="conditions">
@@ -163,11 +174,12 @@ export default function UnifiedAdminPage() {
                 { key: 'description', label: 'Summary', type: 'textarea' }
               ]}
               onAdd={() => update('conditionsList', [...(data.conditionsList || []), { title: '', description: '' }])}
-              onRemove={idx => update('conditionsList', data.conditionsList.filter((_, i) => i !== idx))}
-              onChange={(idx, key, val) => {
+              onRemove={(idx: number) => update('conditionsList', data.conditionsList.filter((_, i) => i !== idx))}
+              onChange={(idx: number, key: string, val: string) => {
                 const list = [...data.conditionsList]; (list[idx] as any)[key] = val; update('conditionsList', list);
               }}
             />
+
           </AdminCard>
         </section>
 
@@ -191,11 +203,12 @@ export default function UnifiedAdminPage() {
                 { key: 'description', label: 'How it works', type: 'textarea' }
               ]}
               onAdd={() => update('treatmentsList', [...(data.treatmentsList || []), { title: '', description: '', label: '' }])}
-              onRemove={idx => update('treatmentsList', data.treatmentsList.filter((_, i) => i !== idx))}
-              onChange={(idx, key, val) => {
+              onRemove={(idx: number) => update('treatmentsList', data.treatmentsList.filter((_, i) => i !== idx))}
+              onChange={(idx: number, key: string, val: string) => {
                 const list = [...data.treatmentsList]; (list[idx] as any)[key] = val; update('treatmentsList', list);
               }}
             />
+
           </AdminCard>
         </section>
 
@@ -213,15 +226,16 @@ export default function UnifiedAdminPage() {
                 { key: 'description', label: 'Details', type: 'textarea' }
               ]}
               onAdd={() => update('advantagesList', [...(data.advantagesList || []), { title: '', description: '' }])}
-              onRemove={idx => update('advantagesList', data.advantagesList.filter((_, i) => i !== idx))}
-              onChange={(idx, key, val) => {
+              onRemove={(idx: number) => update('advantagesList', data.advantagesList.filter((_, i) => i !== idx))}
+              onChange={(idx: number, key: string, val: string) => {
                 const list = [...data.advantagesList]; (list[idx] as any)[key] = val; update('advantagesList', list);
               }}
             />
+
           </AdminCard>
         </section>
 
-        {/* GLOBAL CTA / FOOTER */}
+        {/* GLOBAL CTA */}
         <section id="cta">
           <AdminCard title="7. Global Footer CTA" iconColor="bg-amber-500">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -235,9 +249,10 @@ export default function UnifiedAdminPage() {
           </AdminCard>
         </section>
 
+
+
         <SaveAction saving={saving} success={success} />
       </form>
-
     </div>
   );
 }

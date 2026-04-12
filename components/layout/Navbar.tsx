@@ -13,6 +13,24 @@ export default function Navbar() {
   const [isMounted, setIsMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("HOME");
+  const [navData, setNavData] = useState<{ logoText: string, links: {label: string, href: string}[] } | null>(null);
+
+  useEffect(() => {
+    fetch('/api/content').then(res => res.json()).then(data => {
+      setNavData({
+        logoText: data.navLogoText || 'CLEAR VEIN',
+        links: data.navLinks || [
+          { label: "HOME", href: "/" },
+          { label: "ABOUT DR HASSANIN", href: "/about" },
+          { label: "VEIN CONDITIONS", href: "/#conditions" },
+          { label: "TREATMENTS", href: "/#treatments" },
+          { label: "FEES", href: "/#fees" },
+          { label: "CONTACT", href: "/contact" },
+        ]
+      });
+    });
+  }, []);
+
 
   useEffect(() => {
     setIsMounted(true);
@@ -95,7 +113,7 @@ export default function Navbar() {
     }
   }, [isMenuOpen]);
 
-  const navLinks = [
+  const navLinks = navData?.links || [
     { label: "HOME", href: "/" },
     { label: "ABOUT DR HASSANIN", href: "/about" },
     { label: "VEIN CONDITIONS", href: "/#conditions" },
@@ -103,6 +121,7 @@ export default function Navbar() {
     { label: "FEES", href: "/#fees" },
     { label: "CONTACT", href: "/contact" },
   ];
+
 
   const handleLinkClick = (label: string) => {
     setActiveSection(label);
@@ -130,13 +149,14 @@ export default function Navbar() {
                 />
               </div>
                 <span className="text-xl lg:text-3xl font-bold text-primary uppercase tracking-wider">
-                    CLEAR VEIN
+                    {navData?.logoText || 'CLEAR VEIN'}
                 </span>
+
           </Link>
           
           {/* Center: Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-8">
-              {navLinks.map((link) => {
+              {navLinks.map((link: {label: string, href: string}) => {
                 const isActive = activeSection === link.label;
                 return (
                   <Link 
@@ -151,6 +171,7 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+
           </nav>
 
           {/* Right: CTA Button (Desktop) + Menu Icon (Mobile) */}
@@ -190,7 +211,7 @@ export default function Navbar() {
         <div className="container mx-auto px-6 py-10 space-y-8">
           {/* Mobile Navigation Links */}
           <nav className="flex flex-col space-y-2">
-            {navLinks.map((link, index) => (
+            {navLinks.map((link: {label: string, href: string}, index: number) => (
               <Fade 
                 key={link.label} 
                 direction="down" 
@@ -210,6 +231,7 @@ export default function Navbar() {
                 </Link>
               </Fade>
             ))}
+
           </nav>
 
           {/* Mobile CTA Button */}
