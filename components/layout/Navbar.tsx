@@ -25,6 +25,8 @@ export default function Navbar() {
           { label: "VEIN CONDITIONS", href: "/#conditions" },
           { label: "TREATMENTS", href: "/#treatments" },
           { label: "FEES", href: "/#fees" },
+
+          { label: "SUBSCRIBE", href: "/subscribe" },
           { label: "CONTACT", href: "/contact" },
         ]
       });
