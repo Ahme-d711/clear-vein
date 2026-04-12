@@ -84,7 +84,7 @@ export default function ReferralForm() {
         setSelectedFiles([]);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
         // Simple Validation
@@ -93,26 +93,34 @@ export default function ReferralForm() {
             return;
         }
 
-        const submissionData = {
-            ...formData,
-            attachment: selectedFiles.length > 0 ? selectedFiles[0].file : null
-        };
-        
-        console.log("Form Submitted Successfully:", submissionData);
-        
-        // Clear Form Data
-        setFormData({
-            gpName: '',
-            medicalCouncilId: '',
-            patientDetails: '',
-            clinicalNotes: ''
-        });
+        const loadingToast = toast.loading("Submitting referral...");
 
-        // Clear Selected File & Revoke URL
-        removeFile();
+        try {
+            const res = await fetch('/api/referral', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
 
-        toast.success("Referral Submitted Successfully!");
+            if(!res.ok) throw new Error();
+
+            toast.success("Referral Submitted Successfully!", { id: loadingToast });
+            
+            // Clear Form Data
+            setFormData({
+                gpName: '',
+                medicalCouncilId: '',
+                patientDetails: '',
+                clinicalNotes: ''
+            });
+
+            // Clear Selected File & Revoke URL
+            removeFile();
+        } catch (error) {
+            toast.error("Failed to submit referral. Please try again.", { id: loadingToast });
+        }
     };
+
 
     return (
         <Fade direction="right" triggerOnce>
