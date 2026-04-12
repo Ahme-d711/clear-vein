@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -9,10 +10,10 @@ import { Fade } from "react-awesome-reveal";
 import { openWhatsApp } from "@/lib/whatsapp";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("HOME");
   const [navData, setNavData] = useState<{ logoText: string, links: {label: string, href: string}[] } | null>(null);
 
   useEffect(() => {
@@ -22,10 +23,6 @@ export default function Navbar() {
         links: data.navLinks || [
           { label: "HOME", href: "/" },
           { label: "ABOUT DR HASSANIN", href: "/about" },
-          { label: "VEIN CONDITIONS", href: "/#conditions" },
-          { label: "TREATMENTS", href: "/#treatments" },
-          { label: "FEES", href: "/#fees" },
-
           { label: "SUBSCRIBE", href: "/subscribe" },
           { label: "CONTACT", href: "/contact" },
         ]
@@ -65,47 +62,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Intersection Observer for Active Section
-  useEffect(() => {
-    const navItems = [
-      { label: "HOME", id: "hero" },
-      { label: "ABOUT DR HASSANIN", id: "about" },
-      { label: "VEIN CONDITIONS", id: "conditions" },
-      { label: "TREATMENTS", id: "treatments" },
-      { label: "FEES", id: "fees" },
-    ];
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -70% 0px",
-      threshold: 0,
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const item = navItems.find(i => i.id === entry.target.id);
-          if (item) {
-            setActiveSection(item.label);
-          } else if (window.scrollY < 100) {
-            setActiveSection("HOME");
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    navItems.forEach((item) => {
-      if (item.id) {
-        const element = document.getElementById(item.id);
-        if (element) observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
@@ -118,17 +74,15 @@ export default function Navbar() {
   const navLinks = navData?.links || [
     { label: "HOME", href: "/" },
     { label: "ABOUT DR HASSANIN", href: "/about" },
-    { label: "VEIN CONDITIONS", href: "/#conditions" },
-    { label: "TREATMENTS", href: "/#treatments" },
-    { label: "FEES", href: "/#fees" },
+    { label: "SUBSCRIBE", href: "/subscribe" },
     { label: "CONTACT", href: "/contact" },
   ];
 
 
-  const handleLinkClick = (label: string) => {
-    setActiveSection(label);
+  const handleLinkClick = () => {
     setIsMenuOpen(false);
   };
+
 
   return (
     <>
@@ -141,7 +95,7 @@ export default function Navbar() {
       >
         <div className="container mx-auto max-w-7xl flex h-18 items-center justify-between px-6 lg:px-12"> 
           {/* Left: Logo */}
-          <Link href="/" className="flex items-center gap-3 group" onClick={() => setActiveSection("HOME")}>
+          <Link href="/" className="flex items-center gap-3 group" onClick={handleLinkClick}>
               <div className="relative w-18 h-9 flex items-center justify-center">
                 <Image 
                     src="/logo.svg" 
@@ -159,12 +113,12 @@ export default function Navbar() {
           {/* Center: Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-8">
               {navLinks.map((link: {label: string, href: string}) => {
-                const isActive = activeSection === link.label;
+                const isActive = pathname === link.href;
                 return (
                   <Link 
                     key={link.label} 
                     href={link.href} 
-                    onClick={() => handleLinkClick(link.label)}
+                    onClick={handleLinkClick}
                     className={`text-xs font-semibold tracking-widest transition-all duration-300 uppercase py-1 border-b-2 ${
                       isActive ? "text-primary border-primary" : "text-gray-500 border-transparent hover:text-gray-900"
                     }`}
@@ -223,9 +177,9 @@ export default function Navbar() {
               >
                 <Link 
                   href={link.href}
-                  onClick={() => handleLinkClick(link.label)}
+                  onClick={handleLinkClick}
                   className={`text-lg font-bold transition-all duration-300 py-4 border-b border-gray-50 flex items-center justify-between ${
-                    activeSection === link.label ? "text-[#0084a9]" : "text-[#002045]"
+                    pathname === link.href ? "text-[#0084a9]" : "text-[#002045]"
                   }`}
                 >
                   {link.label}
@@ -240,7 +194,7 @@ export default function Navbar() {
           <Fade direction="up" delay={300} duration={400} triggerOnce={false}>
             <Button 
                 onClick={() => {
-                  handleLinkClick(activeSection);
+                  handleLinkClick();
                   openWhatsApp();
                 }}
                 className="w-full h-14 rounded-none bg-[#005596] text-white text-base font-bold transition-all"

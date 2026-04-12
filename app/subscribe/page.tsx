@@ -1,9 +1,9 @@
-import SubscribeGradientSection from '@/components/subscribe/SubscribeGradientSection'
+import SubscribeNewsletterHero from '@/components/subscribe/SubscribeNewsletterHero'
 
 export default function SubscribePage() {
   return (
     <main className="bg-[#F8F9FF]">
-      <SubscribeGradientSection />
+      <SubscribeNewsletterHero />
     </main>
   )
 }

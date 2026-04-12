@@ -44,9 +44,7 @@ const DEFAULTS = {
   navLinks: [
     { label: "HOME", href: "/" },
     { label: "ABOUT DR HASSANIN", href: "/about" },
-    { label: "VEIN CONDITIONS", href: "/#conditions" },
-    { label: "TREATMENTS", href: "/#treatments" },
-    { label: "FEES", href: "/#fees" },
+    { label: "SUBSCRIBE", href: "/subscribe" },
     { label: "CONTACT", href: "/contact" }
   ],
   footerDescription: 'Specialist venous care delivered with surgical precision. Led by Consultant Vascular Surgeon Dr Ahmed Hassanin.',
