@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, User, ListChecks, ArrowLeft, HeartPulse, ShieldCheck, Globe } from 'lucide-react';
+import { LayoutDashboard, FileText, User, ListChecks, ArrowLeft, HeartPulse, ShieldCheck, Globe, Mail } from 'lucide-react';
 
 
 import { clsx, type ClassValue } from 'clsx';
@@ -31,6 +31,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const pageItems = [
     { label: 'About Page', href: '/admin/about', icon: User },
+    { label: 'Subscribe Page', href: '/admin/subscribe', icon: Mail },
   ];
 
 

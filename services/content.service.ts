@@ -135,7 +135,54 @@ const DEFAULTS = {
       description: "Employing cutting-edge endovenous laser and radiofrequency technology for superior cosmetic and functional results.",
       side: "right"
     }
-  ]
+  ],
+
+  subscribeHeroBadge: 'NEWSLETTER & UPDATES',
+  subscribeHeroTitle: 'Clinical Updates &\nPatient Education',
+  subscribeHeroDescription:
+    'The primary portal for patients and healthcare professionals to stay informed about the latest evidence-based venous treatments, clinical guidelines, and clinic news.',
+  subscribeDoctorCredit: 'Dr. Ahmed Hassanin, PhD, FEBVS',
+  subscribeSecurityNote: 'GDPR Compliant & Secure',
+  subscribeHeroBgSrc: '/hero.svg',
+  subscribeFormHeading: 'Stay Informed',
+  subscribeFormSubmitLabel: 'Subscribe to Updates',
+  subscribePrivacyText:
+    'We respect your privacy. All data is processed according to GDPR clinical standards. You can unsubscribe from these updates at any time via the link in our emails.',
+  subscribeExpectHeading: 'What to Expect',
+  subscribeExpectList: [
+    {
+      title: 'Latest ESVS Guideline Summaries',
+      description:
+        'Concise, actionable breakdowns of European Society for Vascular Surgery updates.',
+    },
+    {
+      title: 'Patient Care Advice',
+      description:
+        'Evidence-based self-care and recovery guidance for post-venous treatment.',
+    },
+    {
+      title: 'GP Education Events',
+      description:
+        'Invitations to exclusive webinars and clinical CPD workshops for practitioners.',
+    },
+    {
+      title: 'Clinic News & Announcements',
+      description:
+        'Operational updates and new clinical capabilities at Clear Vein Clinic.',
+    },
+  ],
+  subscribeExpertTitle: 'Expert Oversight',
+  subscribeExpertQuote:
+    '"Our commitment is to bridge the gap between clinical research and patient care.\nEvery update provided here is scrutinized for clinical accuracy and evidence-based\nrelevance."',
+  subscribeExpertDoctorName: 'Dr. Ahmed Hassanin, PhD, FEBVS',
+  subscribeExpertBio:
+    'Dr. Hassanin is a distinguished Fellow of the European Board of Vascular Surgery with extensive research background in venous hemodynamics. He oversees the clinical integrity of all education and update portals at Clear Vein Clinic.',
+  subscribeExpertImageSrc: '/doctor.svg',
+  subscribeExpertImageAlt: 'Dr. Ahmed Hassanin',
+  subscribeExpertStats: [
+    { value: '15+', label: 'Years Exp.' },
+    { value: '50+', label: 'Publications' },
+  ],
 };
 
 
@@ -165,12 +212,13 @@ export class ContentService {
    */
   static async updateContent(data: ContentUpdateInput): Promise<IContent | null> {
     await connectDB();
-    let content = await Content.findOneAndUpdate({}, data, {
-      new: true, // return updated document
-      upsert: true, // create if not found
-    }).lean() as IContent | null;
+    const raw = await Content.findOneAndUpdate({}, data, {
+      new: true,
+      upsert: true,
+    }).lean();
 
-    return content;
+    if (!raw) return null;
+    return { ...DEFAULTS, ...raw } as unknown as IContent;
   }
 }
 

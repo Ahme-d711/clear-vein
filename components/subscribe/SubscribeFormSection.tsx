@@ -19,31 +19,25 @@ const ROLE_OPTIONS: { value: SubscriberRole; label: string }[] = [
   { value: "hcp", label: "HCP" },
 ];
 
-const EXPECT_ITEMS: {
-  icon: typeof ScrollText;
-  title: string;
-  description: string;
-}[] = [
+const EXPECT_ICONS = [ScrollText, HeartPulse, Presentation, Building2] as const;
+
+const FALLBACK_EXPECT_ITEMS: { title: string; description: string }[] = [
   {
-    icon: ScrollText,
     title: "Latest ESVS Guideline Summaries",
     description:
       "Concise, actionable breakdowns of European Society for Vascular Surgery updates.",
   },
   {
-    icon: HeartPulse,
     title: "Patient Care Advice",
     description:
       "Evidence-based self-care and recovery guidance for post-venous treatment.",
   },
   {
-    icon: Presentation,
     title: "GP Education Events",
     description:
       "Invitations to exclusive webinars and clinical CPD workshops for practitioners.",
   },
   {
-    icon: Building2,
     title: "Clinic News & Announcements",
     description:
       "Operational updates and new clinical capabilities at Clear Vein Clinic.",
@@ -58,23 +52,65 @@ const textareaClass =
 
 const labelClass = "text-sm font-bold text-[#505f76]";
 
-export default function SubscribeFormSection() {
+export interface SubscribeFormSectionProps {
+  formHeading?: string;
+  submitLabel?: string;
+  privacyText?: string;
+  expectHeading?: string;
+  expectItems?: { title: string; description: string }[];
+}
+
+export default function SubscribeFormSection({
+  formHeading = "Stay Informed",
+  submitLabel = "Subscribe to Updates",
+  privacyText = "We respect your privacy. All data is processed according to GDPR clinical standards. You can unsubscribe from these updates at any time via the link in our emails.",
+  expectHeading = "What to Expect",
+  expectItems,
+}: SubscribeFormSectionProps) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [role, setRole] = useState<SubscriberRole | "">("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const resolvedExpect =
+    expectItems && expectItems.length > 0 ? expectItems : FALLBACK_EXPECT_ITEMS;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!fullName.trim() || !email.trim() || !role) {
       toast.error("Please complete all fields.");
       return;
     }
-    toast.success("Thank you — your subscription request was received.");
-    setFullName("");
-    setEmail("");
-    setDescription("");
-    setRole("");
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: fullName.trim(),
+          email: email.trim(),
+          description: description.trim(),
+          role,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        toast.error(
+          typeof err?.message === "string" ? err.message : "Something went wrong."
+        );
+        return;
+      }
+      toast.success("Thank you — your subscription request was received.");
+      setFullName("");
+      setEmail("");
+      setDescription("");
+      setRole("");
+    } catch {
+      toast.error("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -90,7 +126,7 @@ export default function SubscribeFormSection() {
               className="text-2xl font-bold tracking-tight text-[#002045] md:text-[24px] md:leading-8"
               style={{ letterSpacing: "-0.025em" }}
             >
-              Stay Informed
+              {formHeading}
             </h2>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-6">
@@ -172,17 +208,16 @@ export default function SubscribeFormSection() {
               <div className="pt-1">
                 <button
                   type="submit"
-                  className="inline-flex h-14 items-center justify-center gap-2 rounded-sm bg-[#002045] px-8 text-base font-bold text-white transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-[#002045] focus-visible:ring-offset-2 focus-visible:outline-none"
+                  disabled={submitting}
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-sm bg-[#002045] px-8 text-base font-bold text-white transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-[#002045] focus-visible:ring-offset-2 focus-visible:outline-none disabled:opacity-60"
                 >
-                  Subscribe to Updates
+                  {submitting ? "Sending…" : submitLabel}
                   <ArrowRight className="size-4 shrink-0" aria-hidden />
                 </button>
               </div>
 
               <p className="border-t border-[#c4c6cf]/30 pt-6 text-xs leading-relaxed text-[#505f76]">
-                We respect your privacy. All data is processed according to GDPR
-                clinical standards. You can unsubscribe from these updates at any
-                time via the link in our emails.
+                {privacyText}
               </p>
             </form>
           </div>
@@ -192,27 +227,30 @@ export default function SubscribeFormSection() {
               className="text-sm font-bold text-[#002045]"
               style={{ letterSpacing: "0.1em" }}
             >
-              What to Expect
+              {expectHeading}
             </h3>
             <ul className="mt-6 flex flex-col gap-4">
-              {EXPECT_ITEMS.map(({ icon: Icon, title, description }) => (
-                <li
-                  key={title}
-                  className="flex items-start gap-4 border-l-[6px] border-l-[#001D3D] bg-white p-6"
-                >
-                  <span className="flex size-6 shrink-0 items-center justify-center text-[#001D3D]">
-                    <Icon className="size-6" strokeWidth={1.75} aria-hidden />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-lg font-bold leading-snug text-[#001D3D]">
-                      {title}
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-500">
-                      {description}
-                    </p>
-                  </div>
-                </li>
-              ))}
+              {resolvedExpect.map((item, index) => {
+                const Icon = EXPECT_ICONS[index % EXPECT_ICONS.length];
+                return (
+                  <li
+                    key={`${item.title}-${index}`}
+                    className="flex items-start gap-4 border-l-[6px] border-l-[#001D3D] bg-white p-6"
+                  >
+                    <span className="flex size-6 shrink-0 items-center justify-center text-[#001D3D]">
+                      <Icon className="size-6" strokeWidth={1.75} aria-hidden />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-lg font-bold leading-snug text-[#001D3D]">
+                        {item.title}
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-500">
+                        {item.description}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </aside>
         </div>

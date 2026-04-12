@@ -71,6 +71,31 @@ export const ContentUpdateSchema = z.object({
     description: z.string(),
     side: z.enum(['left', 'right'])
   })).optional(),
+
+  subscribeHeroBadge: z.string().optional(),
+  subscribeHeroTitle: z.string().optional(),
+  subscribeHeroDescription: z.string().optional(),
+  subscribeDoctorCredit: z.string().optional(),
+  subscribeSecurityNote: z.string().optional(),
+  subscribeHeroBgSrc: z.string().optional(),
+  subscribeFormHeading: z.string().optional(),
+  subscribeFormSubmitLabel: z.string().optional(),
+  subscribePrivacyText: z.string().optional(),
+  subscribeExpectHeading: z.string().optional(),
+  subscribeExpectList: z.array(z.object({
+    title: z.string(),
+    description: z.string(),
+  })).optional(),
+  subscribeExpertTitle: z.string().optional(),
+  subscribeExpertQuote: z.string().optional(),
+  subscribeExpertDoctorName: z.string().optional(),
+  subscribeExpertBio: z.string().optional(),
+  subscribeExpertImageSrc: z.string().optional(),
+  subscribeExpertImageAlt: z.string().optional(),
+  subscribeExpertStats: z.array(z.object({
+    value: z.string(),
+    label: z.string(),
+  })).optional(),
 });
 
 

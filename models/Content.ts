@@ -51,7 +51,27 @@ export interface IContent extends Document {
   aboutStandardsTitle: string;
   aboutStandardsSubtitle: string;
   aboutPillars: { title: string; description: string; side: 'left' | 'right' }[];
-  
+
+  // Subscribe page
+  subscribeHeroBadge: string;
+  subscribeHeroTitle: string;
+  subscribeHeroDescription: string;
+  subscribeDoctorCredit: string;
+  subscribeSecurityNote: string;
+  subscribeHeroBgSrc: string;
+  subscribeFormHeading: string;
+  subscribeFormSubmitLabel: string;
+  subscribePrivacyText: string;
+  subscribeExpectHeading: string;
+  subscribeExpectList: { title: string; description: string }[];
+  subscribeExpertTitle: string;
+  subscribeExpertQuote: string;
+  subscribeExpertDoctorName: string;
+  subscribeExpertBio: string;
+  subscribeExpertImageSrc: string;
+  subscribeExpertImageAlt: string;
+  subscribeExpertStats: { value: string; label: string }[];
+
   updatedAt: Date;
 }
 
@@ -135,7 +155,66 @@ const ContentSchema: Schema = new Schema(
       title: String,
       description: String,
       side: { type: String, enum: ['left', 'right'] }
-    }]
+    }],
+
+    subscribeHeroBadge: { type: String, default: 'NEWSLETTER & UPDATES' },
+    subscribeHeroTitle: {
+      type: String,
+      default: 'Clinical Updates &\nPatient Education',
+    },
+    subscribeHeroDescription: {
+      type: String,
+      default:
+        'The primary portal for patients and healthcare professionals to stay informed about the latest evidence-based venous treatments, clinical guidelines, and clinic news.',
+    },
+    subscribeDoctorCredit: {
+      type: String,
+      default: 'Dr. Ahmed Hassanin, PhD, FEBVS',
+    },
+    subscribeSecurityNote: {
+      type: String,
+      default: 'GDPR Compliant & Secure',
+    },
+    subscribeHeroBgSrc: { type: String, default: '/hero.svg' },
+    subscribeFormHeading: { type: String, default: 'Stay Informed' },
+    subscribeFormSubmitLabel: {
+      type: String,
+      default: 'Subscribe to Updates',
+    },
+    subscribePrivacyText: {
+      type: String,
+      default:
+        'We respect your privacy. All data is processed according to GDPR clinical standards. You can unsubscribe from these updates at any time via the link in our emails.',
+    },
+    subscribeExpectHeading: { type: String, default: 'What to Expect' },
+    subscribeExpectList: [{
+      title: String,
+      description: String,
+    }],
+    subscribeExpertTitle: { type: String, default: 'Expert Oversight' },
+    subscribeExpertQuote: {
+      type: String,
+      default:
+        '"Our commitment is to bridge the gap between clinical research and patient care.\nEvery update provided here is scrutinized for clinical accuracy and evidence-based\nrelevance."',
+    },
+    subscribeExpertDoctorName: {
+      type: String,
+      default: 'Dr. Ahmed Hassanin, PhD, FEBVS',
+    },
+    subscribeExpertBio: {
+      type: String,
+      default:
+        'Dr. Hassanin is a distinguished Fellow of the European Board of Vascular Surgery with extensive research background in venous hemodynamics. He oversees the clinical integrity of all education and update portals at Clear Vein Clinic.',
+    },
+    subscribeExpertImageSrc: { type: String, default: '/doctor.svg' },
+    subscribeExpertImageAlt: {
+      type: String,
+      default: 'Dr. Ahmed Hassanin',
+    },
+    subscribeExpertStats: [{
+      value: String,
+      label: String,
+    }],
 
   },
   { timestamps: true }
