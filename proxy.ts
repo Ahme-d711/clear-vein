@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Authentication check for admin routes
   if (request.nextUrl.pathname.startsWith('/api/admin')) {
     const authHeader = request.headers.get('Authorization');

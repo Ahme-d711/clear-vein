@@ -193,6 +193,9 @@ const DEFAULTS = {
 
 
 export class ContentService {
+  private static toPlainContent(payload: unknown): IContent {
+    return JSON.parse(JSON.stringify(payload)) as IContent;
+  }
   /**
    * Retrieves the first content entry from the database.
    * If none exists, creates a default one.
@@ -204,11 +207,11 @@ export class ContentService {
     if (!content) {
       // Initialize if empty
       const newContent = await Content.create(DEFAULTS);
-      return (newContent.toObject() as unknown) as IContent;
+      return this.toPlainContent(newContent.toObject());
     }
 
     // Merge with defaults to handle new fields for existing documents
-    return ({ ...DEFAULTS, ...content } as unknown) as IContent;
+    return this.toPlainContent({ ...DEFAULTS, ...content });
   }
 
   /**
@@ -223,7 +226,7 @@ export class ContentService {
     }).lean();
 
     if (!raw) return null;
-    return { ...DEFAULTS, ...raw } as unknown as IContent;
+    return this.toPlainContent({ ...DEFAULTS, ...raw });
   }
 }
 
