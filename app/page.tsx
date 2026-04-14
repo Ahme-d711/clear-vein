@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import ServicesOverview from "@/components/sections/ServicesOverview";
+import PriceHookSection from "@/components/sections/PriceHookSection";
 import DoctorProfile from "@/components/sections/DoctorProfile";
 import ConditionsWeTreat from "@/components/sections/ConditionsWeTreat";
 import AdvancedTreatments from "@/components/sections/AdvancedTreatments";
@@ -23,7 +24,10 @@ export default async function Home() {
         description={content.heroDescription}
         ctaPrimary={content.heroCtaPrimary}
         ctaSecondary={content.heroCtaSecondary}
+        highlights={content.heroHighlights}
       />
+
+      <PriceHookSection />
 
       <ServicesOverview 
         services={content.services} 

@@ -9,6 +9,11 @@ const DEFAULTS = {
   heroDescription: 'Specialist assessment and minimally invasive treatment delivered by a Consultant Vascular Surgeon in a state-of-the-art clinical setting.',
   heroCtaPrimary: 'Book Consultation',
   heroCtaSecondary: 'Learn More',
+  heroHighlights: [
+    'No hospital\nadmission',
+    'Walk-in, walk-out\nprocedures',
+    'Consultant-delivered\ncare',
+  ],
   aboutText: 'Our clinic provides expert care for venous disorders.',
   services: ['Sclerotherapy', 'Varicose Vein Treatment'],
   servicesTitle: 'Comprehensive Venous Assessment and Minimally Invasive Treatment.',

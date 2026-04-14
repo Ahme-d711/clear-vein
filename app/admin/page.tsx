@@ -15,6 +15,7 @@ interface ContentData {
   heroDescription: string;
   heroCtaPrimary: string;
   heroCtaSecondary: string;
+  heroHighlights: string[];
   services: string[];
   servicesTitle: string;
   servicesDescription1: string;
@@ -48,7 +49,16 @@ export default function UnifiedAdminPage() {
 
   useEffect(() => {
     fetch('/api/content').then(res => res.json()).then(json => {
-      setData(json);
+      setData({
+        ...json,
+        heroHighlights: Array.isArray(json.heroHighlights) && json.heroHighlights.length
+          ? json.heroHighlights
+          : [
+              'No hospital\nadmission',
+              'Walk-in, walk-out\nprocedures',
+              'Consultant-delivered\ncare',
+            ],
+      });
       setLoading(false);
     });
   }, []);
@@ -117,6 +127,24 @@ export default function UnifiedAdminPage() {
               <FormField label="Secondary CTA">
                 <input value={data.heroCtaSecondary} onChange={e => update('heroCtaSecondary', e.target.value)} className={inputStyles} required />
               </FormField>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {(data.heroHighlights || []).slice(0, 3).map((item, idx) => (
+                <FormField key={idx} label={`Hero Highlight ${idx + 1}`}>
+                  <textarea
+                    value={item}
+                    onChange={e => {
+                      const next = [...(data.heroHighlights || [])];
+                      while (next.length < 3) next.push('');
+                      next[idx] = e.target.value;
+                      update('heroHighlights', next);
+                    }}
+                    rows={2}
+                    className={inputStyles}
+                    required
+                  />
+                </FormField>
+              ))}
             </div>
           </AdminCard>
         </section>

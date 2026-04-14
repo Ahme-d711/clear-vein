@@ -7,6 +7,7 @@ export interface IContent extends Document {
   heroDescription: string;
   heroCtaPrimary: string;
   heroCtaSecondary: string;
+  heroHighlights: string[];
   aboutText: string;
   services: string[];
   servicesTitle: string;
@@ -83,6 +84,7 @@ const ContentSchema: Schema = new Schema(
     heroDescription: { type: String, required: true, default: '' },
     heroCtaPrimary: { type: String, required: true, default: 'Book Consultation' },
     heroCtaSecondary: { type: String, required: true, default: 'Learn More' },
+    heroHighlights: { type: [String], default: [] },
     aboutText: { type: String, required: true },
     services: { type: [String], default: [] },
     servicesTitle: { type: String, default: 'Comprehensive Venous Assessment and Minimally Invasive Treatment.' },

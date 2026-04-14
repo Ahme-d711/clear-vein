@@ -7,6 +7,7 @@ export const ContentUpdateSchema = z.object({
   heroDescription: z.string().optional(),
   heroCtaPrimary: z.string().optional(),
   heroCtaSecondary: z.string().optional(),
+  heroHighlights: z.array(z.string()).optional(),
   services: z.array(z.string()).optional(),
   servicesTitle: z.string().optional(),
   servicesDescription1: z.string().optional(),

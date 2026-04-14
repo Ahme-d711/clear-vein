@@ -12,9 +12,10 @@ interface HeroProps {
   description: string;
   ctaPrimary: string;
   ctaSecondary: string;
+  highlights: string[];
 }
 
-export default function Hero({ title, subtitle, badge, description, ctaPrimary, ctaSecondary }: HeroProps) {
+export default function Hero({ title, subtitle, badge, description, ctaPrimary, ctaSecondary, highlights }: HeroProps) {
     return (
         <section className="relative w-full min-h-[600px] lg:h-[93vh] flex items-center overflow-hidden pt-20">
             {/* Background Image with Overlay */}
@@ -78,6 +79,20 @@ export default function Hero({ title, subtitle, badge, description, ctaPrimary, 
                             >
                                 {ctaSecondary}
                             </Button>
+                        </div>
+                    </Fade>
+                    <Fade direction="up" triggerOnce delay={500} duration={800}>
+                        <div className="pt-2">
+                            <ul className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-3">
+                                {highlights.map((item, index) => (
+                                    <li key={`${item}-${index}`} className="flex items-start gap-2">
+                                        <span className="text-sm leading-5 font-bold text-[#34D399]">✔</span>
+                                        <span className="text-sm leading-5 text-white/90 whitespace-pre-line">
+                                            {item}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </Fade>
                 </div>
